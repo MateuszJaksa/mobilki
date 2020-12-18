@@ -9,4 +9,52 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="start_shopping">Start shopping!</string>
+    <string name="prepared_sets">Prepared Sets</string>
+    <string name="individual_products">Individual Products</string>
+    <string name="checkout">Checkout</string>
+    <string name="back">Back</string>
+    <string name="submit_order">Submit Order</string>
+    <string name="thanks_for_order">Thank you for placing your order!</string>
+    <string name="update_via_phone">We will update you on the order status via the given phone numer.</string>
+    <string name="finish_shopping">Finish shopping</string>
+    <string name="total_price">Total price: 200 zl <br /> to be paid at the shop</string>
+    <string name="basket">Basket</string>
+
+    <string-array name="cities_array">
+        <item>Warsaw</item>
+        <item>Torun</item>
+        <item>Lodz</item>
+    </string-array>
+
+    <string-array name="shops_array_torun">
+        <item>ul. Lubicka 55</item>
+        <item>ul. Szosa Chelminska 183</item>
+        <item>ul. Broniewskiego 90</item>
+        <item>ul. Stawki Poludniowe 2–18</item>
+        <item>ul. Gdanska 7</item>
+        <item>ul. Niesiolowskiego 25</item>
+    </string-array>
+
+    <string-array name="shops_array_warsaw">
+        <item>ul. Wolska 19/25</item>
+        <item>ul. Sierakowskiego 4</item>
+        <item>ul. Wilenska 14</item>
+        <item>ul. Radzyminska 116</item>
+        <item>ul. Ksiecia Boleslawa 1a</item>
+        <item>ul. Jana Nowaka-Jezioranskiego 35</item>
+        <item>ul. Borzymowska 26</item>
+        <item>ul. Boleslawicka 2</item>
+    </string-array>
+
+    <string-array name="shops_array_lodz">
+        <item>ul. Wincentego Tymienieckiego 16B</item>
+        <item>ul. Karolewska 53</item>
+        <item>ul. Politechniki 30 A</item>
+        <item>ul. Pomorska 75</item>
+        <item>ul. Dabrowskiego 17–21</item>
+        <item>ul. Nowe Sady 1</item>
+        <item>ul. Pilsudskiego 151</item>
+        <item>ul. Przybyszewskiego 197a</item>
+    </string-array>
 </resources>

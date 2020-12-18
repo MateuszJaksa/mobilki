@@ -4,21 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Products">
 
-
-    <ImageView
-        android:id="@+id/instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/instruction" />
+    <SearchView
+        android:id="@+id/search_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/start_btn"
-        android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_below="@id/instruction"
-        android:text="@string/start_shopping" />
+        android:id="@+id/basket_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="@string/basket" />
+
 
 </RelativeLayout>
