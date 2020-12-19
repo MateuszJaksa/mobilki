@@ -6,50 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".Order">
 
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cities_spinner"
+        android:layout_centerInParent="true"
+        android:text="@string/choose_city"
+        android:textColor="@color/apricot"
+        />
+
     <Spinner
         android:id="@+id/cities_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_above="@id/shops_spinner"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="80dp" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/shops_spinner"
+        android:layout_centerInParent="true"
+        android:text="@string/choose_shop"
+        android:textColor="@color/apricot" />
 
     <Spinner
         android:id="@+id/shops_spinner"
-        android:layout_width="match_parent"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="80dp" />
+
+    <TextView
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cities_spinner" />
+        android:layout_above="@id/editTextPhone"
+        android:layout_centerInParent="true"
+        android:text="@string/phone_number"
+        android:textColor="@color/apricot" />
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
         android:layout_below="@id/shops_spinner"
+        android:layout_marginBottom="80dp"
         android:ems="10"
         android:inputType="phone" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/total_price"
-        android:layout_alignParentRight="true"
-        android:layout_above="@id/submit_btn"/>
+        android:layout_above="@id/submit_btn"
+        android:layout_alignParentEnd="true"
+        android:text="@string/total_price" />
 
     <Button
         android:id="@+id/back_btn"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/back" />
 
     <Button
         android:id="@+id/submit_btn"
         android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/submit_order"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="37dp" />
 
-
+        />
 
 
 </RelativeLayout>

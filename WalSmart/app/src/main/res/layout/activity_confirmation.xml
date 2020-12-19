@@ -10,21 +10,29 @@
         android:id="@+id/thanks_for_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/thanks_for_order" />
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginTop="100dp"
+        android:text="@string/thanks_for_order"
+        android:textAlignment="center"
+        android:textSize="50sp" />
 
     <TextView
         android:id="@+id/confirm_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/update_via_phone"
         android:layout_above="@id/finish_btn"
-        />
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_marginBottom="100dp"
+        android:text="@string/update_via_phone"
+        android:textAlignment="center"
+        android:textSize="35sp" />
 
     <Button
         android:id="@+id/finish_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/finish_shopping"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:text="@string/finish_shopping" />
 </RelativeLayout>

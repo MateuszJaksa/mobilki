@@ -45,8 +45,9 @@ public class Order extends AppCompatActivity  implements OnItemSelectedListener 
         cities = (Spinner) findViewById(R.id.cities_spinner);
         cities.setOnItemSelectedListener(this);
 
-        ArrayAdapter<CharSequence> cities_adapter = ArrayAdapter.createFromResource(this,
+         ArrayAdapter<CharSequence> cities_adapter = ArrayAdapter.createFromResource(this,
                 R.array.cities_array, android.R.layout.simple_spinner_item);
+
         cities_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cities.setAdapter(cities_adapter);
 

@@ -8,19 +8,21 @@
 
     <Button
         android:id="@+id/sets_btn"
-        android:layout_width="203dp"
-        android:layout_height="100dp"
-
-        android:text="@string/prepared_sets" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginStart="@android:dimen/app_icon_size"
+        android:text="@string/prepared_sets"
+        />
 
     <Button
         android:id="@+id/products_btn"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="@string/individual_products"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="37dp" />
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginEnd="@android:dimen/app_icon_size"
+        android:text="@string/individual_products"/>
 
   <!--  <LinearLayout
         android:id="@id/list"
@@ -48,13 +50,16 @@
         android:layout_above="@id/checkout_btn"
         android:layout_below="@id/products_btn"
         android:layout_marginTop="-2dp"
-        android:layout_marginBottom="2dp" />
+        android:layout_marginBottom="2dp"
+        android:layout_marginVertical="@dimen/fab_margin"/>
 
     <Button
         android:id="@+id/checkout_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/checkout"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:layout_alignParentBottom="true"/>
 
 
