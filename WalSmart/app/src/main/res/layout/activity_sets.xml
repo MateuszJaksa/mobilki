@@ -8,7 +8,8 @@
     <SearchView
         android:id="@+id/search_set"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <Button
         android:id="@+id/basket_btn2"
@@ -17,5 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:text="@string/basket" />
+        android:text="@string/basket"
+        android:textSize="@dimen/btn_text"
+        />
 </RelativeLayout>

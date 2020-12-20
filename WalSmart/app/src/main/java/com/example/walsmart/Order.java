@@ -46,10 +46,10 @@ public class Order extends AppCompatActivity  implements OnItemSelectedListener 
         cities.setOnItemSelectedListener(this);
 
          ArrayAdapter<CharSequence> cities_adapter = ArrayAdapter.createFromResource(this,
-                R.array.cities_array, android.R.layout.simple_spinner_item);
-
-        cities_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.cities_array, R.layout.my_spinner);
+        cities_adapter.setDropDownViewResource(R.layout.my_spinner);
         cities.setAdapter(cities_adapter);
+
 
     }
     @Override
@@ -68,8 +68,8 @@ public class Order extends AppCompatActivity  implements OnItemSelectedListener 
                 break;
         }
         ArrayAdapter<CharSequence> shops_adapter = ArrayAdapter.createFromResource(this,
-                arr, android.R.layout.simple_spinner_item);
-        shops_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                arr, R.layout.my_spinner);
+        shops_adapter.setDropDownViewResource(R.layout.my_spinner);
         shops_adapter.notifyDataSetChanged();
         shops.setAdapter(shops_adapter);
     }

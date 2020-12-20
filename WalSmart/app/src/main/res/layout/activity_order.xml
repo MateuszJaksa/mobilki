@@ -4,59 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Order">
+    tools:context=".Order"
+    android:layout_marginStart="@dimen/fab_margin"
+    >
 
     <TextView
+        android:id="@+id/choose_city"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_above="@id/cities_spinner"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
         android:text="@string/choose_city"
         android:textColor="@color/apricot"
+        android:textSize="25sp"
         />
 
     <Spinner
         android:id="@+id/cities_spinner"
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_above="@id/shops_spinner"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="80dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/choose_city"
+        android:layout_marginBottom="80dp"
+        android:spinnerMode="dialog"
+        />
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/shops_spinner"
-        android:layout_centerInParent="true"
         android:text="@string/choose_shop"
-        android:textColor="@color/apricot" />
+        android:textColor="@color/apricot"
+        android:textSize="25sp"
+        />
 
     <Spinner
         android:id="@+id/shops_spinner"
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="80dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cities_spinner"
+        android:layout_marginBottom="80dp"
+        android:spinnerMode="dialog"
+        />
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/editTextPhone"
-        android:layout_centerInParent="true"
         android:text="@string/phone_number"
-        android:textColor="@color/apricot" />
+        android:textColor="@color/apricot"
+        android:textSize="25sp"
+        />
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
         android:layout_below="@id/shops_spinner"
         android:layout_marginBottom="80dp"
         android:ems="10"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:textSize="20sp"
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -64,6 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/submit_btn"
         android:layout_alignParentEnd="true"
+        android:textSize="25sp"
+        android:layout_margin="@dimen/fab_margin"
+android:textColor="@color/black_coffee"
         android:text="@string/total_price" />
 
     <Button
@@ -71,9 +83,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:text="@string/back" />
+        android:text="@string/back"
+        android:textSize="@dimen/btn_text"
+        />
 
     <Button
         android:id="@+id/submit_btn"
@@ -84,6 +97,7 @@
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/submit_order"
+        android:textSize="@dimen/btn_text"
 
         />
 
