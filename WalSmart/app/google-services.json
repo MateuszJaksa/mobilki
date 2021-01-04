@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "887414622856",
+    "project_id": "walsmartfb",
+    "storage_bucket": "walsmartfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887414622856:android:2b1cab4f28d6e412c8ad3d",
+        "android_client_info": {
+          "package_name": "com.example.walsmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887414622856-lbl7th86paa7q408tj0tbf8vkt64h1b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8LQuU1KF7SRRqmwJRWmRV0VVlh44AxIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887414622856-lbl7th86paa7q408tj0tbf8vkt64h1b3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
