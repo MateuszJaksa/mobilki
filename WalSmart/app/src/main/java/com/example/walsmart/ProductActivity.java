@@ -18,16 +18,13 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        Button basket = (Button) findViewById(R.id.basket_btn);
-        basket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
-                startActivity(intent);
-            }
+        Button basket = findViewById(R.id.basket_btn);
+        basket.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+            startActivity(intent);
         });
 
-        SearchView searchView = (SearchView) findViewById(R.id.search_product);
+        SearchView searchView = findViewById(R.id.search_product);
         CharSequence query = searchView.getQuery();
 
     }
