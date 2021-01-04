@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-public class Products extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity {
     int quantity = 0;
 
     @Override
@@ -22,7 +22,7 @@ public class Products extends AppCompatActivity {
         basket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Basket.class);
+                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
                 startActivity(intent);
             }
         });

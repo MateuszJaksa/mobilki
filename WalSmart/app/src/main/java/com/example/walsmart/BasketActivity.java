@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Basket extends AppCompatActivity {
+public class BasketActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class Basket extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Order.class);
+                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +28,7 @@ public class Basket extends AppCompatActivity {
         sets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Sets.class);
+                Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
                 startActivity(intent);
             }
         });
@@ -36,7 +36,7 @@ public class Basket extends AppCompatActivity {
         products.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Products.class);
+                Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
                 startActivity(intent);
             }
         });

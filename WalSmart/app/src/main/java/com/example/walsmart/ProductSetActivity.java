@@ -8,17 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 
-public class Sets extends AppCompatActivity {
+public class ProductSetActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sets);
+        setContentView(R.layout.activity_product_sets);
         Button basket = (Button) findViewById(R.id.basket_btn2);
         basket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Basket.class);
+                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
                 startActivity(intent);
             }
         });

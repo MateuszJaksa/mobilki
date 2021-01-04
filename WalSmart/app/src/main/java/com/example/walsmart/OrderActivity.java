@@ -8,13 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-import java.lang.reflect.Array;
-
-public class Order extends AppCompatActivity  implements OnItemSelectedListener {
+public class OrderActivity extends AppCompatActivity  implements OnItemSelectedListener {
     Spinner shops, cities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +24,7 @@ public class Order extends AppCompatActivity  implements OnItemSelectedListener 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Basket.class);
+                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,7 +32,7 @@ public class Order extends AppCompatActivity  implements OnItemSelectedListener 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Confirmation.class);
+                Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
                 startActivity(intent);
             }
         });
