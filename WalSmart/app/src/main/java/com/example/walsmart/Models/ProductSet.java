@@ -4,16 +4,18 @@ import java.util.List;
 
 public class ProductSet {
     private String name;
-    private List<Product> products;
+    private String photo;
+    private List<String> products;
     private double totalPrice;
 
     public ProductSet() {
     }
 
-    public ProductSet(String name, List<Product> products, double totalPrice) {
+    public ProductSet(String name, String photo, List<String> products) {
         this.name = name;
+        this.photo = photo;
         this.products = products;
-        this.totalPrice = totalPrice;
+        calculateTotalPrice();
     }
 
     public String getName() {
@@ -24,11 +26,19 @@ public class ProductSet {
         this.name = name;
     }
 
-    public List<Product> getProducts() {
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public List<String> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<String> products) {
         this.products = products;
     }
 
@@ -38,5 +48,14 @@ public class ProductSet {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public void calculateTotalPrice() {
+        double sum = 0.0;
+        for (String p : products) {
+            //tu trzeba zrobic jakies query zeby po id produktow ich cene zliczyc
+            //sum += p.getPrice();
+        }
+        this.totalPrice = sum;
     }
 }

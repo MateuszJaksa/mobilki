@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.ProductSet;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
@@ -25,6 +26,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -54,13 +57,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        StorageReference s = FirebaseStorage.getInstance().getReference();
-        s.child("product_images/soup_greens.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+       /* StorageReference s = FirebaseStorage.getInstance().getReference();
+        s.child("set_images/chocolate_cake.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url = uri.toString();
                 Log.d("DEBUG", "URL: " + url);
-                addProduct("Soup greens", url, "1 unit", 9.89);
+
+                addProductSet("Chocolate cake", url, );
                 //updateProduct("-MQDFU3Zxir-TYtrhiac", url);
 
                 // biblioteka picasso do wyswietlania zdjec
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
                 Log.d("DEBUG", "URL: error");
             }
-        });
+        });*/
 
 
         Button start = (Button) findViewById(R.id.start_btn);
@@ -88,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
          Product product = new Product(name, photo, size, price);
          String id = mDatabase.push().getKey();
          mDatabase.child("products").child(id).setValue(product);
+    }
+    public void addProductSet(String name, String photo_url, List<String> products) {
+        ProductSet productSet = new ProductSet(name, photo_url, products);
+        String id = mDatabase.push().getKey();
+        mDatabase.child("product_sets").child(id).setValue(productSet);
     }
     public void updateProduct(String id, String photo_url) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
