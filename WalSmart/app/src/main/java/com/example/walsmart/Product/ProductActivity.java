@@ -64,7 +64,6 @@ public class ProductActivity extends AppCompatActivity {
                 itemsAdapter.getFilter().filter(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String query) {
                 itemsAdapter.getFilter().filter(query);
@@ -92,20 +91,11 @@ public class ProductActivity extends AppCompatActivity {
                     products.setAdapter(itemsAdapter);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         };
         query.addListenerForSingleValueEvent(queryValueListener);
-    }
-
-    public void increaseInteger(View view) {
-        if (quantity < 10) quantity++;
-    }
-
-    public void decreaseInteger(View view) {
-        if (quantity > 0) quantity--;
     }
 }

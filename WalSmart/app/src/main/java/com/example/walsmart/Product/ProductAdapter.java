@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.PopUpProductAmount;
 import com.example.walsmart.R;
 import com.squareup.picasso.Picasso;
 
@@ -49,6 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         public TextView productName, productSize, productPrice;
         public ImageView productImage;
+        public Product product;
 
         public ViewHolder(@NonNull View productView) {
             super(productView);
@@ -61,7 +63,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         @Override
         public void onClick(View v) {
-            // tu bedzie popup z pytaniem o ilosc i guzikiem do dodania do koszyka
+            PopUpProductAmount popUp = new PopUpProductAmount(product);
+            popUp.showPopupWindow(v);
         }
     }
 
