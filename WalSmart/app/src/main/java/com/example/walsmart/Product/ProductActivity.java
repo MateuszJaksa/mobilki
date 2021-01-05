@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProductActivity extends AppCompatActivity {
-    int quantity = 0;
     public static RecyclerView products;
     private static ArrayList<Product> download_products = new ArrayList<>();
     private SearchView search_engine;

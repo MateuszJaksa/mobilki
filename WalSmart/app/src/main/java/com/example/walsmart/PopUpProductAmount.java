@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.example.walsmart.Models.Product;
 
 public class PopUpProductAmount {
-    private ImageButton decreaseBtn, increaseBtn;
+    private ImageButton decreaseBtn, increaseBtn, cancelBtn;
     private TextView productAmount;
     private Button addBtn;
     private Product productToAdd;
@@ -38,11 +38,11 @@ public class PopUpProductAmount {
         popUp.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         productAmount = ppView.findViewById(R.id.product_amount);
-        productAmount.setText("0");
+        productAmount.setText("1");
         decreaseBtn = ppView.findViewById(R.id.decrease);
         decreaseBtn.setOnClickListener(v -> {
             int amount = Integer.parseInt(productAmount.getText().toString());
-            if (amount > 0) {
+            if (amount > 1) {
                 amount--;
                 productAmount.setText(Integer.toString(amount));
             }
@@ -64,6 +64,11 @@ public class PopUpProductAmount {
             for (int i = 0; i < amount; i++) {
                 // dodaj do koszyka productToAdd
             }
+            popUp.dismiss();
+        });
+
+        cancelBtn = ppView.findViewById(R.id.cancel_btn);
+        cancelBtn.setOnClickListener(v -> {
             popUp.dismiss();
         });
 
