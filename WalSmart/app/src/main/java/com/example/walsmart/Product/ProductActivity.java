@@ -38,6 +38,7 @@ public class ProductActivity extends AppCompatActivity {
     public static RecyclerView products;
     private static ArrayList<Product> download_products = new ArrayList<>();
     private SearchView search_engine;
+    private final ProductAdapter itemsAdapter = new ProductAdapter(R.layout.product_design, download_products);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +55,19 @@ public class ProductActivity extends AppCompatActivity {
 
         //search
         search_engine = findViewById(R.id.search_product);
-        /*search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                itemArrayAdapter.getFilter().filter(query);
+                itemsAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                itemArrayAdapter.getFilter().filter(query);
+                itemsAdapter.getFilter().filter(query);
                 return false;
             }
-        });*/
+        });
 
     }
 
@@ -85,7 +86,10 @@ public class ProductActivity extends AppCompatActivity {
                             Objects.requireNonNull(next.child("size").getValue()).toString(),
                             Double.parseDouble(Objects.requireNonNull(next.child("price").getValue()).toString()));
                     download_products.add(p);
-                    //Log.d("Debug", "Value = " + p.getName() + p.getPhoto() + p.getSize() + p.getPrice());
+                    products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    products.setItemAnimator(new DefaultItemAnimator());
+                    products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+                    products.setAdapter(itemsAdapter);
                 }
             }
 
@@ -95,12 +99,6 @@ public class ProductActivity extends AppCompatActivity {
             }
         };
         query.addListenerForSingleValueEvent(queryValueListener);
-        ProductAdapter itemsAdapter = new ProductAdapter(R.layout.product_design, download_products);
-        products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        products.setItemAnimator(new DefaultItemAnimator());
-        products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-        products.setAdapter(itemsAdapter);
-
     }
 
     public void increaseInteger(View view) {
