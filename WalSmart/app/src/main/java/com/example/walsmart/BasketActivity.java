@@ -19,28 +19,19 @@ public class BasketActivity extends AppCompatActivity {
         Button products = (Button)findViewById(R.id.products_btn);
         Button checkout = (Button)findViewById(R.id.checkout_btn);
 
-        checkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
-                startActivity(intent);
-            }
+        checkout.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), OrderActivity.class);
+            startActivity(intent);
         });
 
-        sets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
-                startActivity(intent);
-            }
+        sets.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
+            startActivity(intent);
         });
 
-        products.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
-                startActivity(intent);
-            }
+        products.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+            startActivity(intent);
         });
     }
 }
