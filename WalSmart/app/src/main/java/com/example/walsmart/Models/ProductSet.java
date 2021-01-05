@@ -1,5 +1,7 @@
 package com.example.walsmart.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.example.walsmart.MyCallback;
@@ -11,7 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class ProductSet {
+public class ProductSet implements Parcelable {
     private String name;
     private String photo;
     private List<String> products;
@@ -32,6 +34,25 @@ public class ProductSet {
         this.totalPrice = 0.0;
         calculateTotalPrice();
     }
+
+    protected ProductSet(Parcel in) {
+        name = in.readString();
+        photo = in.readString();
+        products = in.createStringArrayList();
+        totalPrice = in.readDouble();
+    }
+
+    public static final Creator<ProductSet> CREATOR = new Creator<ProductSet>() {
+        @Override
+        public ProductSet createFromParcel(Parcel in) {
+            return new ProductSet(in);
+        }
+
+        @Override
+        public ProductSet[] newArray(int size) {
+            return new ProductSet[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -87,5 +108,18 @@ public class ProductSet {
                 }
             });
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(photo);
+        dest.writeStringList(products);
+        dest.writeDouble(totalPrice);
     }
 }

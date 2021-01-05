@@ -1,6 +1,9 @@
 package com.example.walsmart.ProductSet;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,9 +62,9 @@ public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            // nastepne view
-           /* PopUpProductAmount popUp = new PopUpProductAmount(productSet);
-            popUp.showPopupWindow(v);*/
+            Intent intent = new Intent(v.getContext(), EditSet.class);
+             intent.putExtra("product_set", productSet);
+            v.getContext().startActivity(intent);
         }
     }
 
@@ -80,6 +83,7 @@ public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.Vi
         TextView productSetPrice = holder.productSetPrice;
         productSetPrice.setText("PLN " + items.get(index).getTotalPrice());
         ImageView productSetImage = holder.productSetImage;
+        holder.productSet = items.get(index);
         Picasso.with(holder.productSetImage.getContext()).load(items.get(index).getPhoto()).into(productSetImage);
     }
 

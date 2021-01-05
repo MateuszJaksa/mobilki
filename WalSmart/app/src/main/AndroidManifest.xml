@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
-        <activity android:name=".EditSet"></activity>
+        <activity android:name=".ProductSet.EditSet"></activity>
         <activity android:name=".Product.ProductActivity" />
         <activity android:name=".ProductSet.ProductSetActivity" />
         <activity android:name=".ConfirmationActivity" />
