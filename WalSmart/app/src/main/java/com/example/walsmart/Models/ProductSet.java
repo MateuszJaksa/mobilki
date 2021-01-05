@@ -19,7 +19,12 @@ public class ProductSet {
 
     public ProductSet() {
     }
-
+    public ProductSet(String name, String photo, List<String> products, double totalPrice) {
+        this.name = name;
+        this.photo = photo;
+        this.products = products;
+        this.totalPrice = totalPrice;
+    }
     public ProductSet(String name, String photo, List<String> products) {
         this.name = name;
         this.photo = photo;

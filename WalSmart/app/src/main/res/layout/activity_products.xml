@@ -7,23 +7,23 @@
     tools:context=".Product.ProductActivity">
 
     <SearchView
-        android:id="@+id/search_product"
+        android:id="@+id/search_product_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/search_product"
-        android:id="@+id/my_products"
+        android:layout_below="@+id/search_product_set"
+        android:id="@+id/my_product_sets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/basket_btn"
+        android:layout_above="@id/basket_btn_sets"
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin" />
 
     <Button
-        android:id="@+id/basket_btn"
+        android:id="@+id/basket_btn_sets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
