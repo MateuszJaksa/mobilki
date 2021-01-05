@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductActivity">
+    tools:context=".Product.ProductActivity">
 
     <SearchView
         android:id="@+id/search_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true" />
 
-    <GridLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/search_product"
+        android:id="@+id/my_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/basket_btn"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin" />
+   <!-- <GridLayout
         android:id="@+id/grid_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -133,17 +143,15 @@
 
 </RelativeLayout>
 
-    </GridLayout>
+    </GridLayout>-->
 
     <Button
         android:id="@+id/basket_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
         android:text="@string/basket"
-
         android:textSize="@dimen/btn_text" />
 
 </RelativeLayout>

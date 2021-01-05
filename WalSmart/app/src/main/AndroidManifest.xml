@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
         <activity android:name=".EditSet"></activity>
-        <activity android:name=".ProductActivity" />
+        <activity android:name=".Product.ProductActivity" />
         <activity android:name=".ProductSetActivity" />
         <activity android:name=".ConfirmationActivity" />
         <activity android:name=".OrderActivity" />

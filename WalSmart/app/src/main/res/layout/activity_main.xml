@@ -7,12 +7,6 @@
     tools:context=".MainActivity"
     android:background="@color/slate_grey">
 
-
-   <!-- <ImageView
-        android:id="@+id/instruction"
-        android:layout_width="348dp"
-        android:layout_height="641dp"
-        android:layout_centerHorizontal="true" />-->
     <ImageView
         android:id="@+id/instruction"
         android:layout_width="348dp"
