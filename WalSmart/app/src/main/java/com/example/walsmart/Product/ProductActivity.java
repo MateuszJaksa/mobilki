@@ -51,6 +51,9 @@ public class ProductActivity extends AppCompatActivity {
             startActivity(intent);
         });
         products = findViewById(R.id.my_products);
+        products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        products.setItemAnimator(new DefaultItemAnimator());
+        products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         getProductsFromDatabase();
 
         //search
@@ -86,9 +89,6 @@ public class ProductActivity extends AppCompatActivity {
                             Objects.requireNonNull(next.child("size").getValue()).toString(),
                             Double.parseDouble(Objects.requireNonNull(next.child("price").getValue()).toString()));
                     download_products.add(p);
-                    products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    products.setItemAnimator(new DefaultItemAnimator());
-                    products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
                     products.setAdapter(itemsAdapter);
                 }
             }
