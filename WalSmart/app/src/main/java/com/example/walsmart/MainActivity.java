@@ -19,14 +19,19 @@ import com.example.walsmart.Models.ProductSet;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,14 +41,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // firebase do produktow
        /* StorageReference s = FirebaseStorage.getInstance().getReference();
-        s.child("product_images/soup_greens.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        s.child("product_images/flour.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url = uri.toString();
                 Log.d("DEBUG", "URL: " + url);
-                addProduct("Soup greens", url, "1 unit", 9.89);
+                addProduct("Flour", url, "1 kg", 4.00);
                 //updateProduct("-MQDFU3Zxir-TYtrhiac", url);
 
                 // biblioteka picasso do wyswietlania zdjec
@@ -57,14 +63,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-       /* StorageReference s = FirebaseStorage.getInstance().getReference();
-        s.child("set_images/chocolate_cake.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        // firebase do setów produktow
+        /*
+        List<String> ids = new ArrayList<>();
+        //ids.add("-MQDZSex4Km6fFKGzgY-"); // eggs
+        ids.add("-MQDZjnLgGrc0a46QADJ"); // milk
+        //ids.add("-MQDikbjy-nIe92mnWVC"); // sugar
+        ids.add("-MQDnzw4WbJEnBKI38Nk"); // butter
+        //ids.add("-MQHzkwXG5SPdAox8L91"); // flour
+        //ids.add("-MQDmLmR8JskqwS6ZWcq"); // pasta
+        ids.add("-MQDn-CTrY__fIf3OubO"); // rice
+        ids.add("-MQDnPFeICXXEQtw8A6-"); // chicken
+        //ids.add("-MQDokn92pOf65jRDMSZ"); // cheese
+        //ids.add("-MQDpKmXbKzgLrzA6kts"); // ground meat
+        ids.add("-MQDxSKTi-lHWUQ3T60m"); // spinach
+        //ids.add("-MQDxqMy758AaN7euHVN"); // tomato paste
+        //ids.add("-MQDyPcuN9kXS7OecZzY"); // pumpkin
+        //ids.add("-MQDz8PttUUNSKPB1AMO"); // soup greens
+
+      //  ProductSet chocolate_cake = new ProductSet("Chocolate cake", null, ids);
+      //  Log.d("Debug", "Msg: total --> " + chocolate_cake.getTotalPrice());
+
+        StorageReference s = FirebaseStorage.getInstance().getReference();
+        s.child("set_images/chicken_with_spinach.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url = uri.toString();
                 Log.d("DEBUG", "URL: " + url);
 
-                addProductSet("Chocolate cake", url, );
+                addProductSet("Chicken with spinach", url, ids);
                 //updateProduct("-MQDFU3Zxir-TYtrhiac", url);
 
                 // biblioteka picasso do wyswietlania zdjec
@@ -88,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void addProduct(String name, String photo, String size, double price) {
+
+    //metody do firebase
+    /*public void addProduct(String name, String photo, String size, double price) {
          Product product = new Product(name, photo, size, price);
          String id = mDatabase.push().getKey();
          mDatabase.child("products").child(id).setValue(product);
@@ -103,8 +132,5 @@ public class MainActivity extends AppCompatActivity {
         Product product = new Product("Milk", photo_url, "1 liter", 2.59);
         dR.setValue(product);
         Toast.makeText(getApplicationContext(), "Artist Updated", Toast.LENGTH_LONG).show();
-    }
-
-
-
+    }*/
 }
