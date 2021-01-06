@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         // firebase do produktow
-       /* StorageReference s = FirebaseStorage.getInstance().getReference();
-        s.child("product_images/flour.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        /*StorageReference s = FirebaseStorage.getInstance().getReference();
+        s.child("product_images/wild_garlic.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url = uri.toString();
                 Log.d("DEBUG", "URL: " + url);
-                addProduct("Flour", url, "1 kg", 4.00);
+                addProduct("Wild garlic", url, "1 unit", 4.22);
                 //updateProduct("-MQDFU3Zxir-TYtrhiac", url);
 
                 // biblioteka picasso do wyswietlania zdjec
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //metody do firebase
-    /*public void addProduct(String name, String photo, String size, double price) {
+    public void addProduct(String name, String photo, String size, double price) {
          Product product = new Product(name, photo, size, price);
          String id = mDatabase.push().getKey();
          mDatabase.child("products").child(id).setValue(product);
@@ -132,5 +132,5 @@ public class MainActivity extends AppCompatActivity {
         Product product = new Product("Milk", photo_url, "1 liter", 2.59);
         dR.setValue(product);
         Toast.makeText(getApplicationContext(), "Artist Updated", Toast.LENGTH_LONG).show();
-    }*/
+    }
 }

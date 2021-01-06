@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ProductSetActivity extends AppCompatActivity {
-    int quantity = 0;
+
     public static RecyclerView sets;
     private static ArrayList<ProductSet> download_sets = new ArrayList<>();
     private SearchView search_engine;
