@@ -24,7 +24,7 @@ public class BasketActivity extends AppCompatActivity {
 
     public static RecyclerView products;
     private static final ArrayList<Product> basket_products = new ArrayList<>();
-    private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, basket_products);
+    private final BasketAdapter itemsAdapter = new BasketAdapter(R.layout.product_set_design, basket_products);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

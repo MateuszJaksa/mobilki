@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.PopUpProductAmount;
 import com.example.walsmart.R;
 import com.squareup.picasso.Picasso;
@@ -22,9 +23,9 @@ import java.util.ArrayList;
 public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsmart.ProductSet.ProductInSetAdapter.ViewHolder> {
 
     private final int layout_id;
-    private ArrayList<Product> items;
+    private ArrayList<ProductRecord> items;
 
-    public ProductInSetAdapter(int layout_id, ArrayList<Product> items) {
+    public ProductInSetAdapter(int layout_id, ArrayList<ProductRecord> items) {
         this.layout_id = layout_id;
         this.items = items;
     }
@@ -64,11 +65,11 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int index) {
         TextView productName = holder.productName;
-        productName.setText(items.get(index).getName());
+        productName.setText(items.get(index).getProduct().getName());
         TextView productSize = holder.productSize;
-        productSize.setText(items.get(index).getSize());
+        productSize.setText(items.get(index).getProduct().getSize());
         TextView productPrice = holder.productPrice;
-        productPrice.setText("PLN " + items.get(index).getPrice());
+        productPrice.setText("PLN " + items.get(index).getProduct().getPrice());
         TextView productAmount = holder.productAmount;
         productAmount.setText("1");
         ImageButton decreaseBtn = holder.decreaseBtn;
@@ -77,7 +78,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             if (amount > 1) {
                 amount--;
                 productAmount.setText(Integer.toString(amount));
-                items.remove(items.get(index));
+                items.get(index).decrease();
             }
         });
         ImageButton increaseBtn = holder.increaseBtn;
@@ -86,7 +87,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             if (amount < 10) {
                 amount++;
                 productAmount.setText(Integer.toString(amount));
-                items.add(items.get(index));
+                items.get(index).increase();
             }
         });
         ImageButton cancelBtn = holder.cancelBtn;

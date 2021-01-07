@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 public class EditSet extends AppCompatActivity {
     public static RecyclerView products;
-    private static ArrayList<Product> download_products = new ArrayList<>();
+    private static ArrayList<ProductRecord> download_products = new ArrayList<>();
     private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products);
 
     @SuppressLint("SetTextI18n")
@@ -55,8 +56,10 @@ public class EditSet extends AppCompatActivity {
 
         Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
         addAndReturnToBasket.setOnClickListener(v -> {
-            for(Product p: download_products) {
-                Basket.addProduct(p);
+            for(ProductRecord p: download_products) {
+                for(int i = 0; i < p.getAmount(); i++){
+                    Basket.addProduct(p.getProduct()); // do zmiany na ProductRecord
+                }
             }
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);
@@ -70,7 +73,7 @@ public class EditSet extends AppCompatActivity {
             mDatabase.child(String.format("products/%s", key)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Product p = dataSnapshot.getValue(Product.class);
+                    ProductRecord p = new ProductRecord(dataSnapshot.getValue(Product.class), 1);
                     download_products.add(p);
                     products.setAdapter(itemsAdapter);
                 }
