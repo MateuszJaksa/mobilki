@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.OrderActivity;
 import com.example.walsmart.Product.ProductActivity;
 import com.example.walsmart.ProductSet.ProductInSetAdapter;
@@ -23,8 +24,8 @@ import java.util.ArrayList;
 public class BasketActivity extends AppCompatActivity {
 
     public static RecyclerView products;
-    private static final ArrayList<Product> basket_products = new ArrayList<>();
-    private final BasketAdapter itemsAdapter = new BasketAdapter(R.layout.product_set_design, basket_products);
+    private static final ArrayList<ProductRecord> basket_products = new ArrayList<>();
+    private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, basket_products);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

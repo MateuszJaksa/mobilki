@@ -1,6 +1,7 @@
 package com.example.walsmart.ProductSet;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         TextView productPrice = holder.productPrice;
         productPrice.setText("PLN " + items.get(index).getProduct().getPrice());
         TextView productAmount = holder.productAmount;
-        productAmount.setText("1");
+        productAmount.setText(String.valueOf(items.get(index).getAmount()));
         ImageButton decreaseBtn = holder.decreaseBtn;
         decreaseBtn.setOnClickListener(v -> {
             int amount = Integer.parseInt(productAmount.getText().toString());
@@ -79,6 +80,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
                 amount--;
                 productAmount.setText(Integer.toString(amount));
                 items.get(index).decrease();
+                notifyDataSetChanged();
             }
         });
         ImageButton increaseBtn = holder.increaseBtn;
@@ -87,7 +89,9 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             if (amount < 10) {
                 amount++;
                 productAmount.setText(Integer.toString(amount));
+                Log.d("Debug", "Msg: int" + amount);
                 items.get(index).increase();
+                notifyDataSetChanged();
             }
         });
         ImageButton cancelBtn = holder.cancelBtn;

@@ -56,10 +56,8 @@ public class EditSet extends AppCompatActivity {
 
         Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
         addAndReturnToBasket.setOnClickListener(v -> {
-            for(ProductRecord p: download_products) {
-                for(int i = 0; i < p.getAmount(); i++){
-                    Basket.addProduct(p.getProduct()); // do zmiany na ProductRecord
-                }
+            for (ProductRecord p : download_products) {
+                Basket.addProductRecord(p);
             }
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);

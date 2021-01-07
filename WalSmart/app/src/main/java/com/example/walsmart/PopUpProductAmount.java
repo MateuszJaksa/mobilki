@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.ProductRecord;
 
 public class PopUpProductAmount {
     private ImageButton decreaseBtn, increaseBtn, cancelBtn;
@@ -63,10 +64,8 @@ public class PopUpProductAmount {
         addBtn.setOnClickListener(v -> {
             int amount = Integer.parseInt(productAmount.getText().toString());
             if(amount == 0) popUp.dismiss();
-            for (int i = 0; i < amount; i++) {
-                Log.d("Debug", "Msg: product to add " + productToAdd.getName());
-                Basket.addProduct(productToAdd);
-            }
+            ProductRecord pr = new ProductRecord(productToAdd, amount);
+            Basket.addProductRecord(pr);
             popUp.dismiss();
         });
 

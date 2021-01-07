@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Basket {
-    private static final List<Product> products;
+    private static final List<ProductRecord> products;
     private static final double totalPrice;
 
     static {
@@ -15,11 +15,11 @@ public class Basket {
     private Basket() {
     }
 
-    public static List<Product> getProducts() {
+    public static List<ProductRecord> getProducts() {
         return products;
     }
 
-    public static void addProduct(Product product) {
+    public static void addProductRecord(ProductRecord product) {
         products.add(product);
     }
 
