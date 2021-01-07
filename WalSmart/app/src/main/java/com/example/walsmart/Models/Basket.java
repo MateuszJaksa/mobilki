@@ -1,31 +1,33 @@
 package com.example.walsmart.Models;
 
+import java.util.LinkedList;
 import java.util.List;
-// this model is not a part of the database
-// it is just to make the ordering process easier
 
 public class Basket {
-    private List<Product> products;
-    private double totalPrice;
+    private static List<Product> products;
+    private static double totalPrice;
 
-    public Basket(List<Product> products, double totalPrice) {
-        this.products = products;
-        this.totalPrice = totalPrice;
+    static {
+        products = new LinkedList<Product>();
+        totalPrice = 200.0;
     }
 
-    public List<Product> getProducts() {
+    private Basket() {
+    }
+
+    public static List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public static void addProduct(Product product) {
+        //to be added when product is not null
     }
 
-    public double getTotalPrice() {
+    public static void addProductSet(ProductSet set) {
+        //to be added
+    }
+
+    public static double getTotalPrice() {
         return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 }

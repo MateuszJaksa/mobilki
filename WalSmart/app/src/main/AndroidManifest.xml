@@ -14,7 +14,7 @@
         <activity android:name=".ProductSet.ProductSetActivity" />
         <activity android:name=".ConfirmationActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".BasketActivity" />
+        <activity android:name=".Basket.BasketActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

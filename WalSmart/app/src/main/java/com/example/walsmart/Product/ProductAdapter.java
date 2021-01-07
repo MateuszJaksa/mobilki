@@ -26,6 +26,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private final int layout_id;
     private ArrayList<Product> items;
     private final ArrayList<Product> all_items;
+    private Product product;
 
     public ProductAdapter(int layout_id, ArrayList<Product> items) {
         this.layout_id = layout_id;
@@ -86,6 +87,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         productPrice.setText("PLN " + items.get(index).getPrice());
         ImageView productImage = holder.productImage;
         Picasso.with(holder.productImage.getContext()).load(items.get(index).getPhoto()).into(productImage);
+        product = new Product(items.get(index).getName(), items.get(index).getPhoto(), items.get(index).getSize(), items.get(index).getPrice());
     }
 
     @Override
@@ -116,5 +118,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             }
         };
     }
+
 
 }

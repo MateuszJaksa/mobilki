@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SearchView;
 
-import com.example.walsmart.BasketActivity;
+import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.R;
 import com.google.firebase.database.DataSnapshot;

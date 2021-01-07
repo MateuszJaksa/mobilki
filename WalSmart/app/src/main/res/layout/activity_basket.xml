@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BasketActivity">
+    tools:context=".Basket.BasketActivity">
 
     <Button
         android:id="@+id/sets_btn"
@@ -28,35 +28,6 @@
         android:textSize="@dimen/btn_text"
         />
 
-  <!--  <LinearLayout
-        android:id="@id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/products_btn"
-        android:orientation="vertical">
-        &lt;!&ndash;Maybe some loop should be here &ndash;&gt;
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product 1"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product 2"
-            />
-
-
-    </LinearLayout>-->
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/checkout_btn"
-        android:layout_below="@id/products_btn"
-        android:layout_marginTop="-2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginVertical="@dimen/fab_margin"/>
-
     <Button
         android:id="@+id/checkout_btn"
         android:layout_width="wrap_content"
@@ -68,5 +39,13 @@
         android:textSize="@dimen/btn_text"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_basket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sets_btn"
+        android:layout_above="@id/checkout_btn"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin" />
 
 </RelativeLayout>

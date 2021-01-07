@@ -4,6 +4,7 @@ package com.example.walsmart;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
 
 public class PopUpProductAmount {
@@ -62,7 +64,7 @@ public class PopUpProductAmount {
             int amount = Integer.parseInt(productAmount.getText().toString());
             if(amount == 0) popUp.dismiss();
             for (int i = 0; i < amount; i++) {
-                // dodaj do koszyka productToAdd
+                Basket.addProduct(productToAdd);
             }
             popUp.dismiss();
         });
