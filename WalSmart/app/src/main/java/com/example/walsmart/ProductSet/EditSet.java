@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.walsmart.Basket.BasketActivity;
+import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
@@ -46,18 +47,20 @@ public class EditSet extends AppCompatActivity {
         TextView setPrice = findViewById(R.id.set_price);
         setPrice.setText("PLN " + set.getTotalPrice());
 
-        Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
-        addAndReturnToBasket.setOnClickListener(v -> {
-            // dodanie product setu do koszyka
-            Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
-            startActivity(intent);
-        });
-
         products = findViewById(R.id.set_products);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         products.setItemAnimator(new DefaultItemAnimator());
         products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         getProductsFromDatabase(set);
+
+        Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
+        addAndReturnToBasket.setOnClickListener(v -> {
+            for(Product p: download_products) {
+                Basket.addProduct(p);
+            }
+            Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void getProductsFromDatabase(ProductSet set) {

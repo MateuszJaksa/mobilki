@@ -34,7 +34,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         return items == null ? 0 : items.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView productName, productSize, productPrice;
         private ImageButton decreaseBtn, increaseBtn, cancelBtn;
@@ -43,7 +43,6 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         @SuppressLint("SetTextI18n")
         public ViewHolder(@NonNull View productView) {
             super(productView);
-            productView.setOnClickListener(this);
             productName = productView.findViewById(R.id.product_name);
             productSize = productView.findViewById(R.id.product_size);
             productPrice = productView.findViewById(R.id.product_price);
@@ -51,11 +50,6 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             decreaseBtn = productView.findViewById(R.id.decrease);
             increaseBtn = productView.findViewById(R.id.increase);
             cancelBtn = productView.findViewById(R.id.cancel_btn);
-        }
-
-        @Override
-        public void onClick(View v) {
-            // nothing is happening
         }
     }
 
@@ -83,6 +77,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             if (amount > 1) {
                 amount--;
                 productAmount.setText(Integer.toString(amount));
+                items.remove(items.get(index));
             }
         });
         ImageButton increaseBtn = holder.increaseBtn;
@@ -91,6 +86,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             if (amount < 10) {
                 amount++;
                 productAmount.setText(Integer.toString(amount));
+                items.add(items.get(index));
             }
         });
         ImageButton cancelBtn = holder.cancelBtn;

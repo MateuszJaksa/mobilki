@@ -4,11 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Basket {
-    private static List<Product> products;
-    private static double totalPrice;
+    private static final List<Product> products;
+    private static final double totalPrice;
 
     static {
-        products = new LinkedList<Product>();
+        products = new LinkedList<>();
         totalPrice = 200.0;
     }
 
@@ -20,11 +20,7 @@ public class Basket {
     }
 
     public static void addProduct(Product product) {
-        //to be added when product is not null
-    }
-
-    public static void addProductSet(ProductSet set) {
-        //to be added
+        products.add(product);
     }
 
     public static double getTotalPrice() {

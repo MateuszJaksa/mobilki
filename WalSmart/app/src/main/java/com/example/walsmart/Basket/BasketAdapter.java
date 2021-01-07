@@ -35,7 +35,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView productName, productSize, productPrice;
-        public ImageView productImage;
+       // public ImageView productImage;
         public Product product;
 
         public ViewHolder(@NonNull View productView) {
@@ -43,7 +43,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
             productName = productView.findViewById(R.id.product_name);
             productSize = productView.findViewById(R.id.product_size);
             productPrice = productView.findViewById(R.id.product_price);
-            productImage = productView.findViewById(R.id.product_image);
+           // productImage = productView.findViewById(R.id.product_image);
         }
     }
 
@@ -63,7 +63,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         productSize.setText(items.get(index).getSize());
         TextView productPrice = holder.productPrice;
         productPrice.setText("PLN " + items.get(index).getPrice());
-        ImageView productImage = holder.productImage;
-        Picasso.with(holder.productImage.getContext()).load(items.get(index).getPhoto()).into(productImage);
+        //ImageView productImage = holder.productImage;
+       // Picasso.with(holder.productImage.getContext()).load(items.get(index).getPhoto()).into(productImage);
     }
 }

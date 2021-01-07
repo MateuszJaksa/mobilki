@@ -64,6 +64,7 @@ public class PopUpProductAmount {
             int amount = Integer.parseInt(productAmount.getText().toString());
             if(amount == 0) popUp.dismiss();
             for (int i = 0; i < amount; i++) {
+                Log.d("Debug", "Msg: product to add " + productToAdd.getName());
                 Basket.addProduct(productToAdd);
             }
             popUp.dismiss();
