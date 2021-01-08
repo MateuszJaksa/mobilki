@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class OrderActivity extends AppCompatActivity  implements OnItemSelectedListener {
@@ -58,8 +60,9 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
                 if (!input.matches("^(\\d{3}[- ]?){2}\\d{3}$")) {
                     Toast.makeText(getApplicationContext(), "That is not a correct phone number", Toast.LENGTH_LONG).show();
                 } else {
-                    Date d = new Date();
-                    String dateString = d.getDay() + " " + d.getMonth() + " " + d.getYear();
+                    Date d = Calendar.getInstance().getTime();
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                    String dateString = sdf.format(new Date());
                     Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString());
                     String id = mDatabase.push().getKey();
                     mDatabase.child("orders").child(id).setValue(order);
