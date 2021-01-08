@@ -17,8 +17,16 @@ import android.widget.Toast;
 
 import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.Order;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DecimalFormat;
+import java.util.Date;
 
 public class OrderActivity extends AppCompatActivity  implements OnItemSelectedListener {
+    private final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private static final DecimalFormat df2 = new DecimalFormat("#.##");
     Spinner shops, cities;
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,7 +41,7 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
 
         TextView priceTextView = (TextView) findViewById(R.id.priceTextView);
 
-        priceTextView.setText(getResources().getString(R.string.total_price) + Basket.getTotalPrice() + " PLN");
+        priceTextView.setText(getResources().getString(R.string.total_price) + df2.format(Basket.getTotalPrice()) + " PLN");
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +58,12 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
                 if (!input.matches("^(\\d{3}[- ]?){2}\\d{3}$")) {
                     Toast.makeText(getApplicationContext(), "That is not a correct phone number", Toast.LENGTH_LONG).show();
                 } else {
+                    Date d = new Date();
+                    String dateString = d.getDay() + " " + d.getMonth() + " " + d.getYear();
+                    Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString());
+                    String id = mDatabase.push().getKey();
+                    mDatabase.child("orders").child(id).setValue(order);
+
                     Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
                     startActivity(intent);
                 }

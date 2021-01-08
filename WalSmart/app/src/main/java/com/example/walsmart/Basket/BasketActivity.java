@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.walsmart.Models.Basket;
-import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.OrderActivity;
 import com.example.walsmart.Product.ProductActivity;

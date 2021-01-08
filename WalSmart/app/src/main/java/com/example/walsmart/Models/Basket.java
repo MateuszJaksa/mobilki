@@ -5,11 +5,9 @@ import java.util.List;
 
 public class Basket {
     private static final List<ProductRecord> products;
-    private static final double totalPrice;
 
     static {
         products = new LinkedList<>();
-        totalPrice = 200.0;
     }
 
     private Basket() {
@@ -24,6 +22,10 @@ public class Basket {
     }
 
     public static double getTotalPrice() {
+        double totalPrice = 0.0;
+        for (ProductRecord productRecord : products) {
+            totalPrice += productRecord.getTotalPrice();
+        }
         return totalPrice;
     }
 }
