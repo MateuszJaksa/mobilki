@@ -15,21 +15,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
+import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.PopUpProductAmount;
 import com.example.walsmart.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+
+import static java.lang.Math.round;
 
 public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsmart.ProductSet.ProductInSetAdapter.ViewHolder> {
 
     private final int layout_id;
     private ArrayList<ProductRecord> items;
+    private double totalPrice;
 
     public ProductInSetAdapter(int layout_id, ArrayList<ProductRecord> items) {
         this.layout_id = layout_id;
         this.items = items;
     }
+
 
     @Override
     public int getItemCount() {
@@ -62,7 +70,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int index) {
         TextView productName = holder.productName;
@@ -70,7 +78,9 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         TextView productSize = holder.productSize;
         productSize.setText(items.get(index).getProduct().getSize());
         TextView productPrice = holder.productPrice;
-        productPrice.setText("PLN " + items.get(index).getProduct().getPrice());
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat)nf;
+        productPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
         TextView productAmount = holder.productAmount;
         productAmount.setText(String.valueOf(items.get(index).getAmount()));
         ImageButton decreaseBtn = holder.decreaseBtn;

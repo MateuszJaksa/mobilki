@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,8 +32,7 @@ import java.util.ArrayList;
 public class EditSet extends AppCompatActivity {
     public static RecyclerView products;
     private static ArrayList<ProductRecord> download_products = new ArrayList<>();
-    private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products);
-
+    private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products );
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +41,19 @@ public class EditSet extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         ProductSet set = (ProductSet) extras.get("product_set");
-        ImageView img = findViewById(R.id.set_image);
-        Picasso.with(getApplicationContext()).load(set.getPhoto()).into(img);
-        TextView setName = findViewById(R.id.set_name);
-        setName.setText(set.getName());
-        TextView setPrice = findViewById(R.id.set_price);
-        setPrice.setText("PLN " + set.getTotalPrice());
-
         products = findViewById(R.id.set_products);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         products.setItemAnimator(new DefaultItemAnimator());
         products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         getProductsFromDatabase(set);
 
+        ImageView img = findViewById(R.id.set_image);
+        Picasso.with(getApplicationContext()).load(set.getPhoto()).into(img);
+        TextView setName = findViewById(R.id.set_name);
+        setName.setText(set.getName());
+
+        TextView setPrice = findViewById(R.id.set_price);
+        setPrice.setText("PLN " + set.getTotalPrice());
         Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
         addAndReturnToBasket.setOnClickListener(v -> {
             for (ProductRecord p : download_products) {
@@ -74,6 +74,7 @@ public class EditSet extends AppCompatActivity {
                     ProductRecord p = new ProductRecord(dataSnapshot.getValue(Product.class), 1);
                     download_products.add(p);
                     products.setAdapter(itemsAdapter);
+
                 }
 
                 @Override

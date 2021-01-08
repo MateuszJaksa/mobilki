@@ -30,4 +30,8 @@ public class ProductRecord {
     public void decrease() {
         this.amount--;
     }
+
+    public double getTotalPrice() {
+        return amount*product.getPrice();
+    }
 }
