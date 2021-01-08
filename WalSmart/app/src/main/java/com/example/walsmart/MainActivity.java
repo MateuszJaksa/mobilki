@@ -1,3 +1,13 @@
+/*
+* TODO
+* lista zmniejsz tekst i guziki
+* cena ogolna set i basket zeby sie aktualizowala
+* cena double w bazie do zaokraglenia
+* dodawanie setow!
+* ogarnac wizualnie wszystkie view
+* */
+
+
 package com.example.walsmart;
 
 import android.content.Intent;
