@@ -11,10 +11,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/fab_margin"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="@dimen/fab_margin"
         android:text="@string/thanks_for_order"
         android:textAlignment="center"
         android:textSize="50sp" />
+
+    <ImageView
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_below="@id/thanks_for_order"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:src="@drawable/delivery_box" />
 
     <TextView
         android:id="@+id/confirm_order"
@@ -22,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/finish_btn"
         android:layout_marginHorizontal="@dimen/fab_margin"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/update_via_phone"
         android:textAlignment="center"
         android:textSize="35sp" />
@@ -35,6 +43,5 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/finish_shopping"
-        android:textSize="@dimen/btn_text"
-        />
+        android:textSize="@dimen/btn_text" />
 </RelativeLayout>

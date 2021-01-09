@@ -7,7 +7,6 @@
 * ogarnac wizualnie wszystkie view
 * */
 
-
 package com.example.walsmart;
 
 import android.content.Intent;

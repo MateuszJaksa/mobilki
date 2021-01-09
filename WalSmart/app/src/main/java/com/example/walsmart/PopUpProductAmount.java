@@ -70,11 +70,5 @@ public class PopUpProductAmount {
         cancelBtn.setOnClickListener(v -> {
             popUp.dismiss();
         });
-
-        // klikniecie poza popupem
-        ppView.setOnTouchListener((v, event) -> {
-            popUp.dismiss();
-            return true;
-        });
     }
 }
