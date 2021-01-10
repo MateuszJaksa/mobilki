@@ -2,78 +2,42 @@ package com.example.walsmart.User;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.walsmart.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class ResetActivity extends AppCompatActivity {
-
-    @BindView(R.id.email)
-    EditText email;
-    @BindView(R.id.btn_reset_password)
-    Button btnResetPassword;
-    @BindView(R.id.btn_back)
-    Button btnBack;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset);
-        ButterKnife.bind(this);
+        Button reset_password_btn = findViewById(R.id.btn_reset_password);
+        Button back_btn = findViewById(R.id.btn_back);
+        EditText email = findViewById(R.id.email);
+        FirebaseAuth firebase_auth = FirebaseAuth.getInstance();
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        back_btn.setOnClickListener(v -> ResetActivity.this.finish());
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ResetActivity.this.finish();
+        reset_password_btn.setOnClickListener(v -> {
+            String user_email = email.getText().toString().trim();
+            if (TextUtils.isEmpty(user_email)) {
+                Toast.makeText(ResetActivity.this, "Enter correct e-mail", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
-
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userEmail = email.getText().toString().trim();
-
-                if (TextUtils.isEmpty(userEmail)) {
-                    Toast.makeText(ResetActivity.this, "Enter your register email id", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-
-                //reset password you will get a mail
-                firebaseAuth.sendPasswordResetEmail(userEmail)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(ResetActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(ResetActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
-                                }
-
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        });
-            }
+            firebase_auth.sendPasswordResetEmail(user_email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ResetActivity.this, "We've sent you confirmation email", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ResetActivity.this, "Incorrect email", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 }

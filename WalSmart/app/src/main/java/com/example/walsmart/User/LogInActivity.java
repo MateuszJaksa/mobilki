@@ -1,121 +1,67 @@
 package com.example.walsmart.User;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.walsmart.MainActivity;
 import com.example.walsmart.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LogInActivity extends AppCompatActivity {
 
-    @BindView(R.id.email)
-    EditText email;
-    @BindView(R.id.password)
-    EditText password;
-    @BindView(R.id.login_button)
-    Button loginButton;
-    @BindView(R.id.reset_button)
-    Button resetButton;
-    @BindView(R.id.btn_signup)
-    Button btnSignup;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebase_auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        //auto login process
-        //move to main activity if user already sign in
-        if (firebaseAuth.getCurrentUser() != null) {
-            // User is logged in
+        firebase_auth = FirebaseAuth.getInstance();
+        if (firebase_auth.getCurrentUser() != null) {
             startActivity(new Intent(LogInActivity.this, MainActivity.class));
             finish();
         }
-
         setContentView(R.layout.activity_log_in);
-        ButterKnife.bind(this);
+        Button reset_password_btn = findViewById(R.id.reset_button);
+        Button log_in_btn = findViewById(R.id.login_button);
+        Button sign_up_btn = findViewById(R.id.btn_sign_up);
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        firebase_auth = FirebaseAuth.getInstance();
+        sign_up_btn.setOnClickListener(v -> LogInActivity.this.startActivity(new Intent(LogInActivity.this, SignUpActivity.class)));
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        reset_password_btn.setOnClickListener(v -> LogInActivity.this.startActivity(new Intent(LogInActivity.this, ResetActivity.class)));
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogInActivity.this.startActivity(new Intent(LogInActivity.this, SignUpActivity.class));
+        log_in_btn.setOnClickListener(v -> {
+            String user_email = email.getText().toString();
+            String user_password = password.getText().toString();
+
+            if (TextUtils.isEmpty(user_email)) {
+                Toast.makeText(LogInActivity.this.getApplicationContext(), "enter email address", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
-
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogInActivity.this.startActivity(new Intent(LogInActivity.this, ResetActivity.class));
+            if (TextUtils.isEmpty(user_password)) {
+                Toast.makeText(LogInActivity.this.getApplicationContext(), "enter password", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String useremail = email.getText().toString();
-                String userpassword = password.getText().toString();
-
-                if (TextUtils.isEmpty(useremail)) {
-                    Toast.makeText(LogInActivity.this.getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(userpassword)) {
-                    Toast.makeText(LogInActivity.this.getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-
-                //login user
-                firebaseAuth.signInWithEmailAndPassword(useremail,userpassword)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-
-                                if (!task.isSuccessful()) {
-
-                                    if (userpassword.length() < 6) {
-                                        password.setError("LogInActivity.this.getString(R.string.minimum_password)");
-                                    } else {
-                                        Toast.makeText(LogInActivity.this, "LogInActivity.this.getString(R.string.auth_failed)", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                } else {
-                                    LogInActivity.this.startActivity(new Intent(LogInActivity.this, MainActivity.class));
-                                    LogInActivity.this.finish();
-                                }
+            firebase_auth.signInWithEmailAndPassword(user_email, user_password)
+                    .addOnCompleteListener(task -> {
+                        if (!task.isSuccessful()) {
+                            if (user_password.length() < 6) {
+                                password.setError("Password has to have at least 6 characters");
+                            } else {
+                                Toast.makeText(LogInActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                             }
-                        });
-
-            }
+                        } else {
+                            LogInActivity.this.startActivity(new Intent(LogInActivity.this, MainActivity.class));
+                            LogInActivity.this.finish();
+                        }
+                    });
         });
-
-
     }
 }

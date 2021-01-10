@@ -27,6 +27,14 @@
     <string name="minus">-</string>
     <string name="products_amount">How many products would you like to add to the basket?</string>
     <string name="add_to_basket">Add to basket</string>
+    <string name="it_s_smart_to_be_safe">it\'s smart to be safe</string>
+    <string name="e_mail">e-mail</string>
+    <string name="password">password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log in</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="password_recovery_hint">Input e-mail for password recovery</string>
+    <string name="reset_password">Reset password</string>
 
     <string-array name="cities_array">
         <item>Warsaw</item>
