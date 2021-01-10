@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.walsmart.Models.Basket;
@@ -17,6 +18,9 @@ import com.example.walsmart.Product.ProductActivity;
 import com.example.walsmart.ProductSet.ProductInSetAdapter;
 import com.example.walsmart.ProductSet.ProductSetActivity;
 import com.example.walsmart.R;
+import com.example.walsmart.User.LogInActivity;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,7 @@ public class BasketActivity extends AppCompatActivity {
         Button sets_btn = (Button)findViewById(R.id.sets_btn);
         Button products_btn = (Button)findViewById(R.id.products_btn);
         Button checkout_btn = (Button)findViewById(R.id.checkout_btn);
+        Button sign_out_btn = (Button)findViewById(R.id.sign_out_btn);
 
         products = (RecyclerView) findViewById(R.id.my_basket);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -52,6 +57,13 @@ public class BasketActivity extends AppCompatActivity {
 
         products_btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+            startActivity(intent);
+        });
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        sign_out_btn.setOnClickListener(v -> {
+            firebaseAuth.signOut();
+            Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         });
     }

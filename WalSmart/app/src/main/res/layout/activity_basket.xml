@@ -31,22 +31,37 @@
             android:textSize="@dimen/btn_text" />
     </LinearLayout>
 
-
+    <LinearLayout
+        android:id="@+id/buttons2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/checkout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/checkout"
         android:textSize="@dimen/btn_text" />
+
+    <Button
+        android:id="@+id/sign_out_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:text="Log out"
+        android:textSize="@dimen/btn_text" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_basket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/checkout_btn"
+        android:layout_above="@id/buttons2"
         android:background="@drawable/boarder"
         android:padding="5dp"
         android:layout_below="@+id/buttons"

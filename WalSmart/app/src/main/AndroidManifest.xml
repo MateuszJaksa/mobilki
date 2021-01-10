@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.walsmart">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/grocery"
@@ -9,21 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
-        <activity android:name=".ProductSet.EditSet"></activity>
-        <activity android:name=".Product.ProductActivity" android:label="Products"/>
-        <activity android:name=".ProductSet.ProductSetActivity" android:label="Sets"/>
-        <activity android:name=".ConfirmationActivity" />
-        <activity android:name=".OrderActivity" />
-        <activity android:name=".Basket.BasketActivity" android:label="Your basket"/>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.WalSmart.NoActionBar">
+        <activity android:name=".User.ResetActivity"></activity>
+        <activity android:name=".User.LogInActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--android:label="@string/app_name"-->
+        </activity>
+        <activity android:name=".User.SignUpActivity" />
+        <activity android:name=".ProductSet.EditSet" />
+        <activity
+            android:name=".Product.ProductActivity"
+            android:label="Products" />
+        <activity
+            android:name=".ProductSet.ProductSetActivity"
+            android:label="Sets" />
+        <activity android:name=".ConfirmationActivity" />
+        <activity android:name=".OrderActivity" />
+        <activity
+            android:name=".Basket.BasketActivity"
+            android:label="Your basket" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.WalSmart.NoActionBar">
+
+            <!-- android:label="@string/app_name" -->
         </activity>
     </application>
 

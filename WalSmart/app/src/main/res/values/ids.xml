@@ -2,4 +2,5 @@
 <resources>
     <item name="list" type="id" />
     <item name="confirm_order" type="id" />
+    <item name="login" type="id" />
 </resources>
