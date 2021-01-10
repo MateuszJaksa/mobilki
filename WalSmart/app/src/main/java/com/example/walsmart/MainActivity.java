@@ -1,6 +1,6 @@
 /*
 * TODO
-* lista zmniejsz tekst i guziki
+
 * cena ogolna set i basket zeby sie aktualizowala
 * cena double w bazie do zaokraglenia
 * dodawanie setow!

@@ -7,12 +7,13 @@
         <item name="colorOnPrimary">@color/black_coffee</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/floral_white</item>
-        <item name="colorSecondaryVariant">@color/alice_blue</item>
+        <item name="colorSecondaryVariant">@color/apricot</item>
         <item name="colorOnSecondary">@color/black_coffee</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:background">@color/slate_grey</item>
+        <item name="fontFamily">@font/cavollini</item>
+        <item name="android:background">@color/floral_white</item>
         <item name="android:textColor">@color/black_coffee</item>
     </style>
 

@@ -80,7 +80,7 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="@dimen/fab_margin"
                     android:background="@color/floral_white"
-                    android:src="@drawable/cart" />
+                    android:src="@drawable/basket" />
 
                 <Button
                     android:id="@+id/add_btn"

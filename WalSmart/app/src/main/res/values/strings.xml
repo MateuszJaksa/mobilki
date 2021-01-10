@@ -18,8 +18,8 @@
     <string name="thanks_for_order">Thank you for placing your order!</string>
     <string name="update_via_phone">We will update you on the order status via the given phone numer.</string>
     <string name="finish_shopping">Finish shopping</string>
-    <string name="total_price">Total price to be paid <br/>at the shop: </string>
-    <string name="basket">Basket</string>
+    <string name="total_price">Total price to be paid at the shop: </string>
+    <string name="basket">Back To Basket</string>
     <string name="phone_number">Phone Number</string>
     <string name="choose_city">Choose City</string>
     <string name="choose_shop">Choose Shop</string>

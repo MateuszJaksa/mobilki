@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/slate_grey">
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/instruction"
-        android:layout_width="396dp"
-        android:layout_height="659dp"
+        android:layout_width="405dp"
+        android:layout_height="677dp"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/instruction" />
 

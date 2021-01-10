@@ -6,45 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".Basket.BasketActivity">
 
-    <Button
-        android:id="@+id/sets_btn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginStart="@android:dimen/app_icon_size"
-        android:text="@string/prepared_sets"
-        android:textSize="@dimen/btn_text"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        />
+        <Button
+            android:id="@+id/sets_btn"
+            android:layout_marginVertical="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/prepared_sets"
+            android:textSize="@dimen/btn_text"
+            />
 
-    <Button
-        android:id="@+id/products_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginEnd="@android:dimen/app_icon_size"
-        android:text="@string/individual_products"
-        android:textSize="@dimen/btn_text"
-        />
+        <Button
+            android:id="@+id/products_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:text="@string/individual_products"
+            android:textSize="@dimen/btn_text" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/checkout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/checkout"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_alignParentBottom="true"
-        android:textSize="@dimen/btn_text"
-        />
+        android:text="@string/checkout"
+        android:textSize="@dimen/btn_text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_basket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/sets_btn"
         android:layout_above="@id/checkout_btn"
+        android:background="@drawable/boarder"
+        android:padding="5dp"
+        android:layout_below="@+id/buttons"
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin" />
 

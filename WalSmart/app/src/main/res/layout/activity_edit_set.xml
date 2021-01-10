@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:background="@drawable/boarder"
-            android:padding="10dp"
+            android:padding="5dp"
             android:src="@drawable/ic_launcher_foreground" />
 
         <LinearLayout
@@ -31,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/fab_margin"
                 android:text="Product name"
-                android:textColor="@color/floral_white"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -41,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/fab_margin"
                 android:text="Price"
-                android:textColor="@color/floral_white"
                 android:textSize="20sp" />
 
 
@@ -67,7 +65,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginVertical="@dimen/fab_margin"
-            android:src="@drawable/cart"/>
+            android:src="@drawable/basket"/>
         <Button
             android:id="@+id/add_btn_sets"
             android:layout_width="wrap_content"
