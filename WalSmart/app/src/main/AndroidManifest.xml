@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
-        <activity android:name=".ProductSet.CreateSetActivity"></activity>
+        <activity android:name=".ProductSet.CreateSetActivity" />
         <activity
             android:name=".User.ResetActivity"
             android:theme="@style/Theme.WalSmart.NoActionBar" />
@@ -39,6 +39,9 @@
         <activity
             android:name=".Basket.BasketActivity"
             android:label="Your basket" />
+        <activity
+            android:name=".ProductSet.EditCustomSet"
+            android:label="Edit set" />
     </application>
 
 </manifest>

@@ -17,23 +17,30 @@
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/sets_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/fab_margin"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:text="@string/prepared_sets"
-            android:textSize="@dimen/btn_text" />
-
+        android:orientation="vertical">
         <Button
             android:id="@+id/products_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/individual_products"
+            android:textSize="@dimen/btn_text" />
+
+        <Button
+            android:id="@+id/sets_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/prepared_sets"
+            android:textSize="@dimen/btn_text" />
+
+
+        <Button
+            android:id="@+id/my_sets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_sets"
             android:textSize="@dimen/btn_text" />
     </LinearLayout>
 
@@ -54,8 +61,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/checkout_btn"
         android:layout_below="@+id/buttons"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/boarder"
         android:padding="5dp" />
 
@@ -65,8 +72,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/checkout_btn"
         android:layout_below="@+id/buttons"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/boarder"
         android:padding="5dp"
         android:src="@drawable/instruction" />

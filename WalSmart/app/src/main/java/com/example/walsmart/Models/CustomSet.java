@@ -1,16 +1,23 @@
 package com.example.walsmart.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CustomSet {
+public class CustomSet implements Parcelable {
     private String userId;
     private String name;
     private String photo;
-    private List<Product> products;
+    private ArrayList<Product> products;
     private double totalPrice;
 
-    public CustomSet(String userId, String name, String photo, List<Product> products, double totalPrice) {
+    public CustomSet() {
+        // needed for downloading from database
+    }
+    public CustomSet(String userId, String name, String photo, ArrayList<Product> products, double totalPrice) {
         this.userId = userId;
         this.name = name;
         this.photo = photo;
@@ -18,11 +25,30 @@ public class CustomSet {
         this.totalPrice = totalPrice;
     }
 
-    public List<Product> getProducts() {
+    protected CustomSet(Parcel in) {
+        userId = in.readString();
+        name = in.readString();
+        photo = in.readString();
+        totalPrice = in.readDouble();
+    }
+
+    public static final Creator<CustomSet> CREATOR = new Creator<CustomSet>() {
+        @Override
+        public CustomSet createFromParcel(Parcel in) {
+            return new CustomSet(in);
+        }
+
+        @Override
+        public CustomSet[] newArray(int size) {
+            return new CustomSet[size];
+        }
+    };
+
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
     public String getUserId() {
@@ -55,5 +81,19 @@ public class CustomSet {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userId);
+        dest.writeString(name);
+        dest.writeString(photo);
+        dest.writeDouble(totalPrice);
     }
 }

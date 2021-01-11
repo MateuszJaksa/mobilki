@@ -136,6 +136,7 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
         } else if (id == R.id.action_log_out) {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
+            Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         }

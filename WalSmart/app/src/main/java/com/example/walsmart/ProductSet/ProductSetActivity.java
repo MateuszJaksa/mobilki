@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import com.example.walsmart.Basket.BasketActivity;
+import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.CustomSet;
 import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
@@ -37,8 +39,10 @@ public class ProductSetActivity extends AppCompatActivity {
 
     public static RecyclerView sets;
     private static ArrayList<ProductSet> download_sets = new ArrayList<>();
+    private static ArrayList<CustomSet> download_my_sets = new ArrayList<>();
     private SearchView search_engine;
-    private final ProductSetAdapter itemsAdapter = new ProductSetAdapter(R.layout.product_design, download_sets);
+    private final ProductSetAdapter standardAdapter = new ProductSetAdapter(R.layout.product_design, download_sets);
+    private final CustomSetAdapter customAdapter = new CustomSetAdapter(R.layout.product_design, download_my_sets);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,9 @@ public class ProductSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_sets);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        // wybor adaptera setow
+        Bundle extras = getIntent().getExtras();
+        String adapter_type = (String) extras.get("adapter_type");
 
         Button basket = findViewById(R.id.basket_btn_sets);
         basket.setOnClickListener(v -> {
@@ -55,6 +62,7 @@ public class ProductSetActivity extends AppCompatActivity {
         Button create_set = findViewById(R.id.create_set);
         create_set.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
+            intent.putExtra("adapter_type", adapter_type);
             startActivity(intent);
         });
 
@@ -62,20 +70,23 @@ public class ProductSetActivity extends AppCompatActivity {
         sets.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         sets.setItemAnimator(new DefaultItemAnimator());
         sets.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-        getProductSetsFromDatabase();
+        if(adapter_type.equals("Standard Sets")) getProductSetsFromDatabase();
+        else if(adapter_type.equals("My Sets")) getCustomSetsFromDatabase();
 
         //search
         search_engine = findViewById(R.id.search_product_set);
         search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                itemsAdapter.getFilter().filter(query);
+                if(adapter_type.equals("Standard Sets")) standardAdapter.getFilter().filter(query);
+                else if(adapter_type.equals("My Sets")) customAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                itemsAdapter.getFilter().filter(query);
+                if(adapter_type.equals("Standard Sets")) standardAdapter.getFilter().filter(query);
+                else if(adapter_type.equals("My Sets")) customAdapter.getFilter().filter(query);
                 return false;
             }
         });
@@ -101,6 +112,7 @@ public class ProductSetActivity extends AppCompatActivity {
         } else if (id == R.id.action_log_out) {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
+            Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         }
@@ -128,7 +140,31 @@ public class ProductSetActivity extends AppCompatActivity {
                             Double.parseDouble(Objects.requireNonNull(next.child("totalPrice").getValue()).toString()));
                     Log.d("Debug", "Msg: " + products.get(1));
                     download_sets.add(ps);
-                    sets.setAdapter(itemsAdapter);
+                    sets.setAdapter(standardAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(queryValueListener);
+    }
+
+    private void getCustomSetsFromDatabase() {
+        download_my_sets.clear();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth firebase_auth = FirebaseAuth.getInstance();
+        String user_id = firebase_auth.getCurrentUser().getUid();
+        Query query = mDatabase.child("custom_sets").orderByChild("userId").equalTo(user_id);
+        ValueEventListener queryValueListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                for (DataSnapshot next : snapshotIterator) {
+                    download_my_sets.add(next.getValue(CustomSet.class));
+                    sets.setAdapter(customAdapter);
                 }
             }
 

@@ -10,8 +10,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="start_shopping">Start shopping!</string>
-    <string name="prepared_sets">Prepared<br />\nSets</string>
-    <string name="individual_products">Individual<br />\nProducts</string>
+    <string name="prepared_sets">Standard Sets</string>
+    <string name="individual_products">All Products</string>
     <string name="checkout">Checkout</string>
     <string name="back">Back</string>
     <string name="submit_order">Submit Order</string>
@@ -43,6 +43,7 @@
                             Mateusz Jaksa\n
                             Relese date: 16/01/2021\n
                             Version: 1.4.2</string>
+    <string name="my_sets">My sets</string>
 
     <string-array name="cities_array">
         <item>Warsaw</item>

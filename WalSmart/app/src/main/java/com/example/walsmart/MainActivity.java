@@ -4,7 +4,8 @@
 * cena ogolna set i basket zeby sie aktualizowala
 * cena double w bazie do zaokraglenia
 * dodawanie setow!
-* praca nad optymalizacja (np create set i producy activities sa takie same prawie
+* praca nad optymalizacja (np create set i product activities sa takie same prawie)
+* Custom set i Product set jest balagan bo to to samo
 * */
 
 package com.example.walsmart;

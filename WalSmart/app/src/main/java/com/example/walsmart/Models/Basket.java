@@ -23,7 +23,9 @@ public class Basket {
     public static void removeProductRecord(ProductRecord product) {
         products.remove(product);
     }
-
+    public static void clear() {
+        products.clear();
+    }
     public static double getTotalPrice() {
         double totalPrice = 0.0;
         for (ProductRecord productRecord : products) {

@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.example.walsmart.Basket.BasketActivity;
+import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.CustomSet;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Product.ProductAdapter;
@@ -58,6 +59,8 @@ public class CreateSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_set);
         Toolbar myToolbar = findViewById(R.id.toolbar);
+        Bundle extras = getIntent().getExtras();
+        String adapter_type = (String) extras.get("adapter_type");
         setSupportActionBar(myToolbar);
         staticProductList.clear(); // zacznij tworzenie setu z pusta lista
         firebase_auth = FirebaseAuth.getInstance();
@@ -66,6 +69,7 @@ public class CreateSetActivity extends AppCompatActivity {
         create_btn.setOnClickListener(v -> {
             createCustomSet();
             Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
+            intent.putExtra("adapter_type", adapter_type);
             startActivity(intent);
         });
         cancel_btn = findViewById(R.id.cancel_btn);
@@ -115,6 +119,7 @@ public class CreateSetActivity extends AppCompatActivity {
         } else if (id == R.id.action_log_out) {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
+            Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         }
@@ -156,15 +161,10 @@ public class CreateSetActivity extends AppCompatActivity {
             String userId = firebase_auth.getCurrentUser().getUid();
             String name = set_name.getText().toString();
             double totalPrice = 0.0;
-            // jakos trzeba zapelnic ta liste
-            Log.d("Debug", "Msg: static -> " + staticProductList);
-            List<Product> products = new ArrayList<>(staticProductList);
-            Log.d("Debug", "Msg: products -> " + products);
+            ArrayList<Product> products = new ArrayList<>(staticProductList);
             for (Product p : products) {
                 totalPrice += p.getPrice();
-                Log.d("Debug", "Msg: getPrice -> " + p.getPrice());
             }
-            Log.d("Debug", "Msg: price -> " + totalPrice);
             CustomSet customSet = new CustomSet(userId, name, photo, products, totalPrice);
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             String id = mDatabase.push().getKey();

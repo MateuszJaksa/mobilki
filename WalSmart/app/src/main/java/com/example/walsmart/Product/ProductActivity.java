@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import com.example.walsmart.Basket.BasketActivity;
+import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
@@ -88,6 +89,7 @@ public class ProductActivity extends AppCompatActivity {
         } else if (id == R.id.action_log_out) {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
+            Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         }

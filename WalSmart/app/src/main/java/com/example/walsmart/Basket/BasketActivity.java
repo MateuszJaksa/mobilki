@@ -43,6 +43,7 @@ public class BasketActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         Button sets_btn = findViewById(R.id.sets_btn);
         Button products_btn = findViewById(R.id.products_btn);
+        Button my_sets_btn = findViewById(R.id.my_sets);
         Button checkout_btn = findViewById(R.id.checkout_btn);
         instruction = findViewById(R.id.instruction);
         products = findViewById(R.id.my_basket);
@@ -58,6 +59,13 @@ public class BasketActivity extends AppCompatActivity {
 
         sets_btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
+            intent.putExtra("adapter_type", "Standard Sets");
+            startActivity(intent);
+        });
+
+        my_sets_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
+            intent.putExtra("adapter_type", "My Sets");
             startActivity(intent);
         });
 
@@ -86,6 +94,7 @@ public class BasketActivity extends AppCompatActivity {
         } else if (id == R.id.action_log_out) {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
+            Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         }
