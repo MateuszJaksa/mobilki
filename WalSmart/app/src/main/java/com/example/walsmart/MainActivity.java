@@ -4,6 +4,7 @@
 * cena ogolna set i basket zeby sie aktualizowala
 * cena double w bazie do zaokraglenia
 * dodawanie setow!
+* praca nad optymalizacja (np create set i producy activities sa takie same prawie
 * */
 
 package com.example.walsmart;

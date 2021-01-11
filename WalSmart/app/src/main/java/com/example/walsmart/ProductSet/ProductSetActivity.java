@@ -46,11 +46,18 @@ public class ProductSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_sets);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
         Button basket = findViewById(R.id.basket_btn_sets);
         basket.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);
         });
+        Button create_set = findViewById(R.id.create_set);
+        create_set.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
+            startActivity(intent);
+        });
+
         sets = findViewById(R.id.my_product_sets);
         sets.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         sets.setItemAnimator(new DefaultItemAnimator());
@@ -65,6 +72,7 @@ public class ProductSetActivity extends AppCompatActivity {
                 itemsAdapter.getFilter().filter(query);
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String query) {
                 itemsAdapter.getFilter().filter(query);
@@ -73,6 +81,7 @@ public class ProductSetActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -97,6 +106,7 @@ public class ProductSetActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void getProductSetsFromDatabase() {
         download_sets.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -108,7 +118,7 @@ public class ProductSetActivity extends AppCompatActivity {
                 for (DataSnapshot next : snapshotIterator) {
                     Iterable<DataSnapshot> productsIterator = next.child("products").getChildren();
                     List<String> products = new ArrayList<>();
-                    for(DataSnapshot next_product : productsIterator) {
+                    for (DataSnapshot next_product : productsIterator) {
                         products.add(Objects.requireNonNull(next_product.getValue()).toString());
                     }
                     ProductSet ps = new ProductSet(
@@ -121,6 +131,7 @@ public class ProductSetActivity extends AppCompatActivity {
                     sets.setAdapter(itemsAdapter);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

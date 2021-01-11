@@ -3,6 +3,7 @@ package com.example.walsmart;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +12,26 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.CustomSet;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
+import com.example.walsmart.ProductSet.CreateSetActivity;
+
+import static com.example.walsmart.ProductSet.CreateSetActivity.staticProductList;
 
 public class PopUpProductAmount {
     private ImageButton decreaseBtn, increaseBtn, cancelBtn;
     private TextView productAmount;
     private Button addBtn;
     private Product productToAdd;
+    private String destination;
 
-    public PopUpProductAmount(Product product) {
+    public PopUpProductAmount(Product product, String destination) {
         productToAdd = product;
+        this.destination = destination;
     }
 
     @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
@@ -60,12 +68,17 @@ public class PopUpProductAmount {
         addBtn = ppView.findViewById(R.id.add_btn);
         addBtn.setOnClickListener(v -> {
             int amount = Integer.parseInt(productAmount.getText().toString());
-            if(amount == 0) popUp.dismiss();
-            ProductRecord pr = new ProductRecord(productToAdd, amount);
-            Basket.addProductRecord(pr);
+            if(destination.equals("Basket")) {
+                ProductRecord pr = new ProductRecord(productToAdd, amount);
+                Basket.addProductRecord(pr);
+            } else if (destination.equals("Custom Set")) {
+                for(int i = 0; i < amount; i++) {
+                    staticProductList.add(productToAdd);
+                }
+            }
+            Toast.makeText(v.getContext(), "Product added", Toast.LENGTH_SHORT).show();
             popUp.dismiss();
         });
-
         cancelBtn = ppView.findViewById(R.id.cancel_btn);
         cancelBtn.setOnClickListener(v -> {
             popUp.dismiss();

@@ -10,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,11 +27,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private final int layout_id;
     private ArrayList<Product> items;
     private final ArrayList<Product> all_items;
+    private final String destination;
 
-    public ProductAdapter(int layout_id, ArrayList<Product> items) {
+    public ProductAdapter(int layout_id, ArrayList<Product> items, String destination) {
         this.layout_id = layout_id;
         this.items = items;
         all_items = items;
+        this.destination = destination;
     }
 
     public ArrayList<Product> getItems() {
@@ -40,6 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void setItems(ArrayList<Product> items) {
         this.items = items;
     }
+
 
     @Override
     public int getItemCount() {
@@ -51,6 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         public TextView productName, productSize, productPrice;
         public ImageView productImage;
         public Product product;
+        public String myDestination;
 
         public ViewHolder(@NonNull View productView) {
             super(productView);
@@ -64,7 +69,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @Override
         public void onClick(View v) {
             Log.d("Debug", "Msg: " + product.getName());
-            PopUpProductAmount popUp = new PopUpProductAmount(product);
+            PopUpProductAmount popUp = new PopUpProductAmount(product, myDestination);
             popUp.showPopupWindow(v);
         }
     }
@@ -88,6 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         ImageView productImage = holder.productImage;
         Picasso.with(holder.productImage.getContext()).load(items.get(index).getPhoto()).into(productImage);
         holder.product = items.get(index);
+        holder.myDestination = destination;
     }
 
     @Override
