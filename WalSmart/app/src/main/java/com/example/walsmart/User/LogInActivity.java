@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.walsmart.MainActivity;
+import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -22,7 +22,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         firebase_auth = FirebaseAuth.getInstance();
         if (firebase_auth.getCurrentUser() != null) {
-            startActivity(new Intent(LogInActivity.this, MainActivity.class));
+            startActivity(new Intent(LogInActivity.this, BasketActivity.class));
             finish();
         }
         setContentView(R.layout.activity_log_in);
@@ -58,7 +58,7 @@ public class LogInActivity extends AppCompatActivity {
                                 Toast.makeText(LogInActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            LogInActivity.this.startActivity(new Intent(LogInActivity.this, MainActivity.class));
+                            LogInActivity.this.startActivity(new Intent(LogInActivity.this, BasketActivity.class));
                             LogInActivity.this.finish();
                         }
                     });

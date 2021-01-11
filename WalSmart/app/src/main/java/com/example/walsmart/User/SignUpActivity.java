@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.walsmart.MainActivity;
+import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (!task.isSuccessful()) {
                         SignUpActivity.this.Toast("Authentication failed" + task.getException());
                     } else {
-                        SignUpActivity.this.startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                        SignUpActivity.this.startActivity(new Intent(SignUpActivity.this, BasketActivity.class));
                         SignUpActivity.this.finish();
                     }
                 });

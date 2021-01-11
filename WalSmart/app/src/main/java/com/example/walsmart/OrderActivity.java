@@ -1,10 +1,14 @@
 package com.example.walsmart;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +22,8 @@ import android.widget.Toast;
 import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Order;
+import com.example.walsmart.User.LogInActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,7 +41,8 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
-
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
         Button back = (Button) findViewById(R.id.back_btn);
         Button submit = (Button) findViewById(R.id.submit_btn);
 
@@ -110,5 +117,28 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.authors))
+                    .setNegativeButton(android.R.string.ok, null).setIcon(getDrawable(R.drawable.grocery))
+                    .show();
+        } else if (id == R.id.action_log_out) {
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

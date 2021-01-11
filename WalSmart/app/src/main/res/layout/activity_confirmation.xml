@@ -4,10 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/floral_white"
     tools:context=".ConfirmationActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color" >
+    </androidx.appcompat.widget.Toolbar>
     <TextView
         android:id="@+id/thanks_for_order"
+        android:layout_below="@id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/fab_margin"
@@ -17,8 +24,8 @@
         android:textSize="50sp" />
 
     <ImageView
-        android:layout_width="247dp"
-        android:layout_height="237dp"
+        android:layout_width="228dp"
+        android:layout_height="210dp"
         android:layout_below="@id/thanks_for_order"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/fab_margin"

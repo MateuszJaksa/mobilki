@@ -20,6 +20,9 @@ public class Basket {
     public static void addProductRecord(ProductRecord product) {
         products.add(product);
     }
+    public static void removeProductRecord(ProductRecord product) {
+        products.remove(product);
+    }
 
     public static double getTotalPrice() {
         double totalPrice = 0.0;

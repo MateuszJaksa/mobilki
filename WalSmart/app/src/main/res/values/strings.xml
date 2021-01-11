@@ -35,6 +35,14 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="password_recovery_hint">Input e-mail for password recovery</string>
     <string name="reset_password">Reset password</string>
+    <string name="about">About</string>
+    <string name="log_out">Log out</string>
+    <string name="authors"> \n Creators:\n
+                            Bartłomiej Baranowski\n
+                            Barbara Borkowska\n
+                            Mateusz Jaksa\n
+                            Relese date: 16/01/2021\n
+                            Version: 1.4.2</string>
 
     <string-array name="cities_array">
         <item>Warsaw</item>

@@ -4,10 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/floral_white"
     tools:context=".Basket.BasketActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color" >
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/buttons"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -15,57 +22,52 @@
 
         <Button
             android:id="@+id/sets_btn"
-            android:layout_marginVertical="@dimen/fab_margin"
-            android:layout_marginEnd="@dimen/fab_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/fab_margin"
+            android:layout_marginEnd="@dimen/fab_margin"
             android:text="@string/prepared_sets"
-            android:textSize="@dimen/btn_text"
-            />
+            android:textSize="@dimen/btn_text" />
 
         <Button
             android:id="@+id/products_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-              android:text="@string/individual_products"
+            android:text="@string/individual_products"
             android:textSize="@dimen/btn_text" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/buttons2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal">
     <Button
         android:id="@+id/checkout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
         android:text="@string/checkout"
         android:textSize="@dimen/btn_text" />
 
-    <Button
-        android:id="@+id/sign_out_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:text="Log out"
-        android:textSize="@dimen/btn_text" />
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_basket"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/buttons2"
-        android:background="@drawable/boarder"
-        android:padding="5dp"
+        android:layout_above="@id/checkout_btn"
         android:layout_below="@+id/buttons"
         android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin" />
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:background="@drawable/boarder"
+        android:padding="5dp" />
 
+    <ImageView
+        android:id="@+id/instruction"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/checkout_btn"
+        android:layout_below="@+id/buttons"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:background="@drawable/boarder"
+        android:padding="5dp"
+        android:src="@drawable/instruction" />
 </RelativeLayout>

@@ -2,13 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/floral_white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Product.ProductActivity">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color" >
+    </androidx.appcompat.widget.Toolbar>
     <SearchView
         android:id="@+id/search_product_set"
         android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true" />
@@ -27,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/fab_margin"
         android:layout_alignParentBottom="true"
         android:text="@string/basket"
         android:textSize="@dimen/btn_text" />

@@ -1,10 +1,9 @@
 /*
 * TODO
-
+  * usuwanie z koszyka sie odswieza i nie zapisuje (edit: chyba dziala ale moze lepiej do koszyka ten osobny adapter uzyc
 * cena ogolna set i basket zeby sie aktualizowala
 * cena double w bazie do zaokraglenia
 * dodawanie setow!
-* ogarnac wizualnie wszystkie view
 * */
 
 package com.example.walsmart;

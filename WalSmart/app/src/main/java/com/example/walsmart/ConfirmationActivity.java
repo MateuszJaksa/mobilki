@@ -1,11 +1,19 @@
 package com.example.walsmart;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.walsmart.User.LogInActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ConfirmationActivity extends AppCompatActivity {
 
@@ -13,14 +21,38 @@ public class ConfirmationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmation);
-
-        Button finish = (Button)findViewById(R.id.finish_btn);
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+        Button finish = findViewById(R.id.finish_btn);
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        finish.setOnClickListener(v -> {
+            firebaseAuth.signOut();
+            Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            new AlertDialog.Builder(this)
+                    .setTitle("About application")
+                    .setMessage(getString(R.string.authors))
+                    .setNegativeButton(android.R.string.ok, null).setIcon(getDrawable(R.drawable.grocery))
+                    .show();
+        } else if (id == R.id.action_log_out) {
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

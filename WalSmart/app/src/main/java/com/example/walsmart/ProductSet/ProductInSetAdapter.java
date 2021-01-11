@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.Models.ProductSet;
@@ -37,7 +38,6 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         this.layout_id = layout_id;
         this.items = items;
     }
-
 
     @Override
     public int getItemCount() {
@@ -106,6 +106,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         });
         ImageButton cancelBtn = holder.cancelBtn;
         cancelBtn.setOnClickListener(v -> {
+            Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
             items.remove(index); // popup czy na pewno?
             notifyDataSetChanged();
         });
