@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.SearchView;
 
-import com.example.walsmart.Basket.BasketActivity;
+import com.example.walsmart.BasketActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.R;
@@ -62,6 +62,7 @@ public class ProductActivity extends AppCompatActivity {
                 itemsAdapter.getFilter().filter(query);
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String query) {
                 itemsAdapter.getFilter().filter(query);
@@ -70,6 +71,7 @@ public class ProductActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -114,6 +116,7 @@ public class ProductActivity extends AppCompatActivity {
                     products.setAdapter(itemsAdapter);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

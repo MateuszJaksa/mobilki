@@ -36,10 +36,10 @@
         <activity android:name=".ConfirmationActivity" />
         <activity android:name=".OrderActivity" />
         <activity
-            android:name=".Basket.BasketActivity"
+            android:name=".BasketActivity"
             android:label="Your basket" />
         <activity
-            android:name=".ProductSet.EditCustomSet"
+            android:name=".ProductSet.EditSet"
             android:label="Edit set" />
     </application>
 

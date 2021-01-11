@@ -24,14 +24,16 @@ public class ProductRecord {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
     public void increase() {
         this.amount++;
     }
+
     public void decrease() {
         this.amount--;
     }
 
     public double getTotalPrice() {
-        return amount*product.getPrice();
+        return amount * product.getPrice();
     }
 }

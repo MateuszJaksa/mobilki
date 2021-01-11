@@ -19,7 +19,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Order;
 import com.example.walsmart.User.LogInActivity;
@@ -32,10 +31,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class OrderActivity extends AppCompatActivity  implements OnItemSelectedListener {
+public class OrderActivity extends AppCompatActivity implements OnItemSelectedListener {
     private final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private static final DecimalFormat df2 = new DecimalFormat("#.##");
     Spinner shops, cities;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +52,25 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
 
         priceTextView.setText(getResources().getString(R.string.total_price) + df2.format(Basket.getTotalPrice()) + " PLN");
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
-                startActivity(intent);
-            }
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+            startActivity(intent);
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String input = phoneNumber.getText().toString();
-                if (!input.matches("^(\\d{3}[- ]?){2}\\d{3}$")) {
-                    Toast.makeText(getApplicationContext(), "That is not a correct phone number", Toast.LENGTH_LONG).show();
-                } else {
-                    Date d = Calendar.getInstance().getTime();
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                    String dateString = sdf.format(new Date());
-                    Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString());
-                    String id = mDatabase.push().getKey();
-                    mDatabase.child("orders").child(id).setValue(order);
+        submit.setOnClickListener(v -> {
+            String input = phoneNumber.getText().toString();
+            if (!input.matches("^(\\d{3}[- ]?){2}\\d{3}$")) {
+                Toast.makeText(getApplicationContext(), "That is not a correct phone number", Toast.LENGTH_LONG).show();
+            } else {
+                Date d = Calendar.getInstance().getTime();
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                String dateString = sdf.format(new Date());
+                Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString());
+                String id = mDatabase.push().getKey();
+                mDatabase.child("orders").child(id).setValue(order);
 
-                    Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,13 +79,14 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
         cities = (Spinner) findViewById(R.id.cities_spinner);
         cities.setOnItemSelectedListener(this);
 
-         ArrayAdapter<CharSequence> cities_adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> cities_adapter = ArrayAdapter.createFromResource(this,
                 R.array.cities_array, R.layout.my_spinner);
         cities_adapter.setDropDownViewResource(R.layout.my_spinner);
         cities.setAdapter(cities_adapter);
 
 
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
@@ -118,6 +113,7 @@ public class OrderActivity extends AppCompatActivity  implements OnItemSelectedL
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);

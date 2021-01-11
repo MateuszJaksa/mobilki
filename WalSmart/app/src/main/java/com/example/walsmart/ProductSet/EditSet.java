@@ -18,9 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.walsmart.Basket.BasketActivity;
+import com.example.walsmart.BasketActivity;
 import com.example.walsmart.Models.Basket;
-import com.example.walsmart.Models.CustomSet;
+import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.R;
@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class EditCustomSet extends AppCompatActivity {
+public class EditSet extends AppCompatActivity {
     public static RecyclerView products;
     private static ArrayList<ProductRecord> download_products = new ArrayList<>();
     private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products);
@@ -43,7 +43,7 @@ public class EditCustomSet extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         Bundle extras = getIntent().getExtras();
-        CustomSet set = (CustomSet) extras.get("custom_set");
+        ProductSet set = (ProductSet) extras.get("custom_set");
         ArrayList<Product> products_list = extras.getParcelableArrayList("custom_set_products");
         Log.d("Debug", "Msg: set " + set.getName());
         products = findViewById(R.id.set_products);
@@ -97,7 +97,6 @@ public class EditCustomSet extends AppCompatActivity {
 
     private void convertProductsToProductRecords(ArrayList<Product> list) {
         download_products.clear();
-        Log.d("Debug", "Msg: " + list);
         boolean wasAdded;
         for (Product p : list) {
             wasAdded = false;

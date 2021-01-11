@@ -3,9 +3,7 @@
   * usuwanie z koszyka sie odswieza i nie zapisuje (edit: chyba dziala ale moze lepiej do koszyka ten osobny adapter uzyc
 * cena ogolna set i basket zeby sie aktualizowala
 * cena double w bazie do zaokraglenia
-* dodawanie setow!
 * praca nad optymalizacja (np create set i product activities sa takie same prawie)
-* Custom set i Product set jest balagan bo to to samo
 * */
 
 package com.example.walsmart;
@@ -18,14 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.walsmart.Basket.BasketActivity;
-import com.example.walsmart.Models.Product;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -114,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
          Product product = new Product(name, photo, size, price);
          String id = mDatabase.push().getKey();
          mDatabase.child("products").child(id).setValue(product);
-    }
-    public void addProductSet(String name, String photo_url, List<String> products) {
-        ProductSet productSet = new ProductSet(name, photo_url, products);
-        String id = mDatabase.push().getKey();
-        mDatabase.child("product_sets").child(id).setValue(productSet);
     }
     public void updateProduct(String id, String photo_url) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);

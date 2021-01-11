@@ -2,7 +2,6 @@ package com.example.walsmart.ProductSet;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,29 +13,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.walsmart.Models.CustomSet;
+import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.ViewHolder> implements Filterable {
+public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.ViewHolder> implements Filterable {
 
     private final int layout_id;
-    private ArrayList<CustomSet> items;
-    private final ArrayList<CustomSet> all_items;
+    private ArrayList<ProductSet> items;
+    private final ArrayList<ProductSet> all_items;
 
-    public CustomSetAdapter(int layout_id, ArrayList<CustomSet> items) {
+    public ProductSetAdapter(int layout_id, ArrayList<ProductSet> items) {
         this.layout_id = layout_id;
         this.items = items;
         all_items = items;
     }
 
-    public ArrayList<CustomSet> getItems() {
+    public ArrayList<ProductSet> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<CustomSet> items) {
+    public void setItems(ArrayList<ProductSet> items) {
         this.items = items;
     }
 
@@ -49,7 +48,7 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
 
         public TextView productSetName, productSetPrice;
         public ImageView productSetImage;
-        public CustomSet customSet;
+        public ProductSet productSet;
 
         public ViewHolder(@NonNull View productSetView) {
             super(productSetView);
@@ -61,9 +60,9 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), EditCustomSet.class);
-            intent.putExtra("custom_set", customSet);
-            intent.putParcelableArrayListExtra("custom_set_products", customSet.getProducts());
+            Intent intent = new Intent(v.getContext(), EditSet.class);
+            intent.putExtra("custom_set", productSet);
+            intent.putParcelableArrayListExtra("custom_set_products", productSet.getProducts());
             v.getContext().startActivity(intent);
         }
     }
@@ -83,7 +82,7 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
         TextView productSetPrice = holder.productSetPrice;
         productSetPrice.setText("PLN " + items.get(index).getTotalPrice());
         ImageView productSetImage = holder.productSetImage;
-        holder.customSet = items.get(index);
+        holder.productSet = items.get(index);
         Picasso.with(holder.productSetImage.getContext()).load(items.get(index).getPhoto()).into(productSetImage);
     }
 
@@ -95,8 +94,8 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
                 items = all_items;
                 String charString = cs.toString();
                 if (!charString.isEmpty()) {
-                    ArrayList<CustomSet> filtered = new ArrayList<>();
-                    for (CustomSet ps : all_items) {
+                    ArrayList<ProductSet> filtered = new ArrayList<>();
+                    for (ProductSet ps : all_items) {
                         if (ps.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filtered.add(ps);
                         }
@@ -110,7 +109,7 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
 
             @Override
             protected void publishResults(CharSequence cs, FilterResults results) {
-                items = (ArrayList<CustomSet>) results.values;
+                items = (ArrayList<ProductSet>) results.values;
                 notifyDataSetChanged();
             }
         };

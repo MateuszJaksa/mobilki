@@ -1,6 +1,5 @@
 package com.example.walsmart.ProductSet;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -11,25 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SearchView;
 
-import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Basket;
-import com.example.walsmart.Models.CustomSet;
+import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Product.ProductAdapter;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,7 +33,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,16 +44,17 @@ public class CreateSetActivity extends AppCompatActivity {
     private FirebaseAuth firebase_auth;
     public static RecyclerView products;
     private static ArrayList<Product> download_products = new ArrayList<>();
-    private final ProductAdapter itemsAdapter = new ProductAdapter(R.layout.product_design, download_products, "Custom Set");
+    private final ProductAdapter itemsAdapter = new ProductAdapter(R.layout.product_design, download_products, "Product Set");
     // tworzenie listy statycznej
     public static List<Product> staticProductList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_set);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         Bundle extras = getIntent().getExtras();
-        String adapter_type = (String) extras.get("adapter_type");
+        String set_type = (String) extras.get("set_type");
         setSupportActionBar(myToolbar);
         staticProductList.clear(); // zacznij tworzenie setu z pusta lista
         firebase_auth = FirebaseAuth.getInstance();
@@ -69,7 +63,7 @@ public class CreateSetActivity extends AppCompatActivity {
         create_btn.setOnClickListener(v -> {
             createCustomSet();
             Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
-            intent.putExtra("adapter_type", adapter_type);
+            intent.putExtra("set_type", set_type);
             startActivity(intent);
         });
         cancel_btn = findViewById(R.id.cancel_btn);
@@ -166,10 +160,10 @@ public class CreateSetActivity extends AppCompatActivity {
             for (Product p : products) {
                 totalPrice += p.getPrice();
             }
-            CustomSet customSet = new CustomSet(userId, name, photo, products, totalPrice);
+            ProductSet productSet = new ProductSet(userId, name, photo, products, totalPrice);
             DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             String id = mDatabase.push().getKey();
-            mDatabase.child("custom_sets").child(id).setValue(customSet);
+            mDatabase.child("custom_sets").child(id).setValue(productSet);
         }).addOnFailureListener(exception -> Log.d("DEBUG", "URL: error"));
 
     }

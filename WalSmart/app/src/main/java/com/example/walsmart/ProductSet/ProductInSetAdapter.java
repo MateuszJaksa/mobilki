@@ -26,7 +26,6 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
 
     private final int layout_id;
     private ArrayList<ProductRecord> items;
-    private double totalPrice;
 
     public ProductInSetAdapter(int layout_id, ArrayList<ProductRecord> items) {
         this.layout_id = layout_id;
@@ -73,7 +72,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         productSize.setText(items.get(index).getProduct().getSize());
         TextView productPrice = holder.productPrice;
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
-        DecimalFormat df = (DecimalFormat)nf;
+        DecimalFormat df = (DecimalFormat) nf;
         productPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
         TextView productAmount = holder.productAmount;
         productAmount.setText(String.valueOf(items.get(index).getAmount()));
@@ -93,7 +92,6 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
             if (amount < 10) {
                 amount++;
                 productAmount.setText(Integer.toString(amount));
-                Log.d("Debug", "Msg: int" + amount);
                 items.get(index).increase();
                 notifyDataSetChanged();
             }

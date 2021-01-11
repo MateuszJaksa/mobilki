@@ -4,20 +4,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-public class CustomSet implements Parcelable {
+public class ProductSet implements Parcelable {
     private String userId;
     private String name;
     private String photo;
     private ArrayList<Product> products;
     private double totalPrice;
 
-    public CustomSet() {
+    public ProductSet() {
         // needed for downloading from database
     }
-    public CustomSet(String userId, String name, String photo, ArrayList<Product> products, double totalPrice) {
+
+    public ProductSet(String userId, String name, String photo, ArrayList<Product> products, double totalPrice) {
         this.userId = userId;
         this.name = name;
         this.photo = photo;
@@ -25,22 +24,22 @@ public class CustomSet implements Parcelable {
         this.totalPrice = totalPrice;
     }
 
-    protected CustomSet(Parcel in) {
+    protected ProductSet(Parcel in) {
         userId = in.readString();
         name = in.readString();
         photo = in.readString();
         totalPrice = in.readDouble();
     }
 
-    public static final Creator<CustomSet> CREATOR = new Creator<CustomSet>() {
+    public static final Creator<ProductSet> CREATOR = new Creator<ProductSet>() {
         @Override
-        public CustomSet createFromParcel(Parcel in) {
-            return new CustomSet(in);
+        public ProductSet createFromParcel(Parcel in) {
+            return new ProductSet(in);
         }
 
         @Override
-        public CustomSet[] newArray(int size) {
-            return new CustomSet[size];
+        public ProductSet[] newArray(int size) {
+            return new ProductSet[size];
         }
     };
 
@@ -51,6 +50,7 @@ public class CustomSet implements Parcelable {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
+
     public String getUserId() {
         return userId;
     }

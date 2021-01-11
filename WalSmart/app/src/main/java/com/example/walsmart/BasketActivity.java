@@ -1,4 +1,4 @@
-package com.example.walsmart.Basket;
+package com.example.walsmart;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,11 +18,9 @@ import android.widget.ImageView;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.ProductRecord;
-import com.example.walsmart.OrderActivity;
 import com.example.walsmart.Product.ProductActivity;
 import com.example.walsmart.ProductSet.ProductInSetAdapter;
 import com.example.walsmart.ProductSet.ProductSetActivity;
-import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
