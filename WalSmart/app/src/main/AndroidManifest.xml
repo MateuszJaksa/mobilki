@@ -27,7 +27,6 @@
         <activity
             android:name=".User.SignUpActivity"
             android:theme="@style/Theme.WalSmart.NoActionBar" />
-        <activity android:name=".ProductSet.EditSet" />
         <activity
             android:name=".Product.ProductActivity"
             android:label="Products" />

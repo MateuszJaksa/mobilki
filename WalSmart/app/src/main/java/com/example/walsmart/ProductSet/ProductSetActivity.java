@@ -11,7 +11,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import android.widget.SearchView;
 import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.CustomSet;
-import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +30,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class ProductSetActivity extends AppCompatActivity {
 

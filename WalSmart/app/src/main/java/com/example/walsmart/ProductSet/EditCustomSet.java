@@ -23,7 +23,6 @@ import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.CustomSet;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
-import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;

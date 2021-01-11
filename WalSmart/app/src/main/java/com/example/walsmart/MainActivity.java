@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.walsmart.Basket.BasketActivity;
 import com.example.walsmart.Models.Product;
-import com.example.walsmart.Models.ProductSet;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //metody do firebase
-    public void addProduct(String name, String photo, String size, double price) {
+   /* public void addProduct(String name, String photo, String size, double price) {
          Product product = new Product(name, photo, size, price);
          String id = mDatabase.push().getKey();
          mDatabase.child("products").child(id).setValue(product);
@@ -126,5 +125,5 @@ public class MainActivity extends AppCompatActivity {
         Product product = new Product("Milk", photo_url, "1 liter", 2.59);
         dR.setValue(product);
         Toast.makeText(getApplicationContext(), "Artist Updated", Toast.LENGTH_LONG).show();
-    }
+    }*/
 }
