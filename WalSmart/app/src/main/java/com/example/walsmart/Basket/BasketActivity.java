@@ -59,13 +59,13 @@ public class BasketActivity extends AppCompatActivity {
 
         sets_btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
-            intent.putExtra("adapter_type", "Standard Sets");
+            intent.putExtra("set_type", "Standard Sets");
             startActivity(intent);
         });
 
         my_sets_btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), ProductSetActivity.class);
-            intent.putExtra("adapter_type", "My Sets");
+            intent.putExtra("set_type", "My Sets");
             startActivity(intent);
         });
 

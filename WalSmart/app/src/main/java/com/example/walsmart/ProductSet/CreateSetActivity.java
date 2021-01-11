@@ -156,9 +156,10 @@ public class CreateSetActivity extends AppCompatActivity {
     public void createCustomSet() {
         // tworzenie setu i dodanie go do bazy danych
         StorageReference s = FirebaseStorage.getInstance().getReference();
-        s.child("set_images/delivery_box.png").getDownloadUrl().addOnSuccessListener(uri -> {
+        s.child("set_images/delivery_box.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
             String photo = uri.toString();
             String userId = firebase_auth.getCurrentUser().getUid();
+            //String userId = "standard";
             String name = set_name.getText().toString();
             double totalPrice = 0.0;
             ArrayList<Product> products = new ArrayList<>(staticProductList);

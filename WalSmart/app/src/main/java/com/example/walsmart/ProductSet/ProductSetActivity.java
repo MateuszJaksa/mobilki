@@ -38,10 +38,10 @@ import java.util.Objects;
 public class ProductSetActivity extends AppCompatActivity {
 
     public static RecyclerView sets;
-    private static ArrayList<ProductSet> download_sets = new ArrayList<>();
+   // private static ArrayList<ProductSet> download_sets = new ArrayList<>();
     private static ArrayList<CustomSet> download_my_sets = new ArrayList<>();
     private SearchView search_engine;
-    private final ProductSetAdapter standardAdapter = new ProductSetAdapter(R.layout.product_design, download_sets);
+   // private final ProductSetAdapter standardAdapter = new ProductSetAdapter(R.layout.product_design, download_sets);
     private final CustomSetAdapter customAdapter = new CustomSetAdapter(R.layout.product_design, download_my_sets);
 
     @Override
@@ -52,7 +52,7 @@ public class ProductSetActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         // wybor adaptera setow
         Bundle extras = getIntent().getExtras();
-        String adapter_type = (String) extras.get("adapter_type");
+        String set_type = (String) extras.get("set_type");
 
         Button basket = findViewById(R.id.basket_btn_sets);
         basket.setOnClickListener(v -> {
@@ -62,7 +62,7 @@ public class ProductSetActivity extends AppCompatActivity {
         Button create_set = findViewById(R.id.create_set);
         create_set.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
-            intent.putExtra("adapter_type", adapter_type);
+            intent.putExtra("set_type", set_type);
             startActivity(intent);
         });
 
@@ -70,23 +70,20 @@ public class ProductSetActivity extends AppCompatActivity {
         sets.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         sets.setItemAnimator(new DefaultItemAnimator());
         sets.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-        if(adapter_type.equals("Standard Sets")) getProductSetsFromDatabase();
-        else if(adapter_type.equals("My Sets")) getCustomSetsFromDatabase();
+        getCustomSetsFromDatabase(set_type);
 
         //search
         search_engine = findViewById(R.id.search_product_set);
         search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(adapter_type.equals("Standard Sets")) standardAdapter.getFilter().filter(query);
-                else if(adapter_type.equals("My Sets")) customAdapter.getFilter().filter(query);
+                customAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                if(adapter_type.equals("Standard Sets")) standardAdapter.getFilter().filter(query);
-                else if(adapter_type.equals("My Sets")) customAdapter.getFilter().filter(query);
+                 customAdapter.getFilter().filter(query);
                 return false;
             }
         });
@@ -119,7 +116,7 @@ public class ProductSetActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getProductSetsFromDatabase() {
+  /*  private void getProductSetsFromDatabase() {
         download_sets.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Query query = mDatabase.child("product_sets").orderByKey();
@@ -150,13 +147,15 @@ public class ProductSetActivity extends AppCompatActivity {
             }
         };
         query.addListenerForSingleValueEvent(queryValueListener);
-    }
+    }*/
 
-    private void getCustomSetsFromDatabase() {
+    private void getCustomSetsFromDatabase(String set_type) {
         download_my_sets.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebase_auth = FirebaseAuth.getInstance();
-        String user_id = firebase_auth.getCurrentUser().getUid();
+        String user_id = null;
+        if(set_type.equals("Standard Sets")) user_id = "standard";
+        else if(set_type.equals("My Sets")) user_id = firebase_auth.getCurrentUser().getUid();
         Query query = mDatabase.child("custom_sets").orderByChild("userId").equalTo(user_id);
         ValueEventListener queryValueListener = new ValueEventListener() {
             @Override
@@ -167,7 +166,6 @@ public class ProductSetActivity extends AppCompatActivity {
                     sets.setAdapter(customAdapter);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
