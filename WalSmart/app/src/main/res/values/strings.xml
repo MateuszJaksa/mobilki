@@ -44,6 +44,7 @@
                             Relese date: 16/01/2021\n
                             Version: 1.4.2</string>
     <string name="my_sets">My sets</string>
+    <string name="my_orders">My orders</string>
 
     <string-array name="cities_array">
         <item>Warsaw</item>

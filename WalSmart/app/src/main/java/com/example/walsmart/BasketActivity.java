@@ -18,6 +18,8 @@ import android.widget.ImageView;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.ProductRecord;
+import com.example.walsmart.Order.MyOrdersActivity;
+import com.example.walsmart.Order.OrderActivity;
 import com.example.walsmart.Product.ProductActivity;
 import com.example.walsmart.ProductSet.ProductInSetAdapter;
 import com.example.walsmart.ProductSet.ProductSetActivity;
@@ -73,6 +75,7 @@ public class BasketActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -95,9 +98,13 @@ public class BasketActivity extends AppCompatActivity {
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
+        } else if(id == R.id.action_my_orders) {
+            Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     private void loadBasket() {
         basket_products.clear();

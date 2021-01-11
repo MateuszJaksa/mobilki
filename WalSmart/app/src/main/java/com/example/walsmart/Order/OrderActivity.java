@@ -1,4 +1,4 @@
-package com.example.walsmart;
+package com.example.walsmart.Order;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,8 +19,11 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.walsmart.BasketActivity;
+import com.example.walsmart.ConfirmationActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Order;
+import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -65,8 +68,9 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
                 Date d = Calendar.getInstance().getTime();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = sdf.format(new Date());
-                Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString());
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String id = mDatabase.push().getKey();
+                Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString(), userId);
                 mDatabase.child("orders").child(id).setValue(order);
 
                 Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
@@ -134,6 +138,9 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
             firebaseAuth.signOut();
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
+        } else if(id == R.id.action_my_orders) {
+            Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

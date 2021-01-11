@@ -1,9 +1,9 @@
 /*
 * TODO
-  * usuwanie z koszyka sie odswieza i nie zapisuje (edit: chyba dziala ale moze lepiej do koszyka ten osobny adapter uzyc
 * cena ogolna set i basket zeby sie aktualizowala
 * cena double w bazie do zaokraglenia
 * praca nad optymalizacja (np create set i product activities sa takie same prawie)
+* dodac My Orders do menu
 * */
 
 package com.example.walsmart;

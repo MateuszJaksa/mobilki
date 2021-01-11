@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,6 +28,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         finish.setOnClickListener(v -> {
             firebaseAuth.signOut();
+            Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
         });
@@ -53,6 +55,9 @@ public class ConfirmationActivity extends AppCompatActivity {
             firebaseAuth.signOut();
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
+        } else if(id == R.id.action_my_orders) {
+            Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

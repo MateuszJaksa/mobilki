@@ -21,6 +21,7 @@ import android.widget.SearchView;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.Product.ProductAdapter;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
@@ -115,6 +116,9 @@ public class CreateSetActivity extends AppCompatActivity {
             firebaseAuth.signOut();
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
+        } else if(id == R.id.action_my_orders) {
+            Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -9,6 +9,10 @@ public class ProductRecord {
         this.amount = amount;
     }
 
+    public ProductRecord() {
+        // needed for database
+    }
+
     public Product getProduct() {
         return product;
     }

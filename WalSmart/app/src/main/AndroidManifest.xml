@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
+        <activity android:name=".Order.MyOrdersActivity"></activity>
         <activity android:name=".ProductSet.CreateSetActivity" />
         <activity
             android:name=".User.ResetActivity"
@@ -34,7 +35,7 @@
             android:name=".ProductSet.ProductSetActivity"
             android:label="Sets" />
         <activity android:name=".ConfirmationActivity" />
-        <activity android:name=".OrderActivity" />
+        <activity android:name=".Order.OrderActivity" />
         <activity
             android:name=".BasketActivity"
             android:label="Your basket" />

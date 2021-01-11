@@ -1,4 +1,4 @@
-package com.example.walsmart.ProductSet;
+package com.example.walsmart.Order;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,12 +14,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.SearchView;
 
 import com.example.walsmart.BasketActivity;
 import com.example.walsmart.Models.Basket;
-import com.example.walsmart.Models.ProductSet;
-import com.example.walsmart.Order.MyOrdersActivity;
+import com.example.walsmart.Models.Order;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,55 +30,27 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ProductSetActivity extends AppCompatActivity {
-
-    public static RecyclerView sets;
-    private static ArrayList<ProductSet> download_my_sets = new ArrayList<>();
-    private final ProductSetAdapter customAdapter = new ProductSetAdapter(R.layout.product_design, download_my_sets);
+public class MyOrdersActivity extends AppCompatActivity {
+    public static RecyclerView orders;
+    private static ArrayList<Order> download_orders = new ArrayList<>();
+    private final OrderAdapter itemsAdapter = new OrderAdapter(R.layout.order_design, download_orders);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_sets);
+        setContentView(R.layout.activity_my_orders);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        // wybor typu setow
-        Bundle extras = getIntent().getExtras();
-        String set_type = (String) extras.get("set_type");
-
-        Button basket = findViewById(R.id.basket_btn_sets);
-        basket.setOnClickListener(v -> {
+        Button back = findViewById(R.id.back_btn);
+        back.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);
         });
-        Button create_set = findViewById(R.id.create_set);
-        create_set.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
-            intent.putExtra("set_type", set_type);
-            startActivity(intent);
-        });
-
-        sets = findViewById(R.id.my_product_sets);
-        sets.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        sets.setItemAnimator(new DefaultItemAnimator());
-        sets.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-        getCustomSetsFromDatabase(set_type);
-
-        //search
-        SearchView search_engine = findViewById(R.id.search_product_set);
-        search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                customAdapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                customAdapter.getFilter().filter(query);
-                return false;
-            }
-        });
+        orders = findViewById(R.id.my_orders);
+        orders.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        orders.setItemAnimator(new DefaultItemAnimator());
+        orders.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+        getOrdersFromDatabase();
     }
 
     @Override
@@ -112,21 +82,19 @@ public class ProductSetActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getCustomSetsFromDatabase(String set_type) {
-        download_my_sets.clear();
+    private void getOrdersFromDatabase() {
+        download_orders.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebase_auth = FirebaseAuth.getInstance();
-        String user_id = null;
-        if (set_type.equals("Standard Sets")) user_id = "standard";
-        else if (set_type.equals("My Sets")) user_id = firebase_auth.getCurrentUser().getUid();
-        Query query = mDatabase.child("custom_sets").orderByChild("userId").equalTo(user_id);
+        String user_id = firebase_auth.getCurrentUser().getUid();
+        Query query = mDatabase.child("orders").orderByChild("userId").equalTo(user_id);
         ValueEventListener queryValueListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 for (DataSnapshot next : snapshotIterator) {
-                    download_my_sets.add(next.getValue(ProductSet.class));
-                    sets.setAdapter(customAdapter);
+                    download_orders.add(next.getValue(Order.class));
+                    orders.setAdapter(itemsAdapter);
                 }
             }
 
