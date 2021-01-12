@@ -42,6 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/info"
+        android:background="#25FF6F00"
+        android:layout_marginHorizontal="@dimen/fab_margin"
         android:clickable="true"
         android:focusable="true" />
 

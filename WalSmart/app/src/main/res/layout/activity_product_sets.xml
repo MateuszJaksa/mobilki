@@ -16,6 +16,8 @@
         android:id="@+id/search_product_set"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
+        android:background="#25FF6F00"
+        android:layout_margin="@dimen/fab_margin"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true" />
