@@ -17,7 +17,10 @@ import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.ViewHolder> implements Filterable {
 
@@ -80,7 +83,10 @@ public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.Vi
         TextView productSetName = holder.productSetName;
         productSetName.setText(items.get(index).getName());
         TextView productSetPrice = holder.productSetPrice;
-        productSetPrice.setText("PLN " + items.get(index).getTotalPrice());
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat df = (DecimalFormat) nf;
+        nf.setMaximumFractionDigits(2);
+        productSetPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
         ImageView productSetImage = holder.productSetImage;
         holder.productSet = items.get(index);
         Picasso.with(holder.productSetImage.getContext()).load(items.get(index).getPhoto()).into(productSetImage);

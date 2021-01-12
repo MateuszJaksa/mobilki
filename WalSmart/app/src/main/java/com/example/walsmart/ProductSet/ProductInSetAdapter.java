@@ -72,6 +72,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         productSize.setText(items.get(index).getProduct().getSize());
         TextView productPrice = holder.productPrice;
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        nf.setMaximumFractionDigits(2);
         DecimalFormat df = (DecimalFormat) nf;
         productPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
         TextView productAmount = holder.productAmount;

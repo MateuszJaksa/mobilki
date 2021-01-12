@@ -29,7 +29,10 @@ import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class EditSet extends AppCompatActivity {
     public static RecyclerView products;
@@ -57,9 +60,11 @@ public class EditSet extends AppCompatActivity {
         Picasso.with(getApplicationContext()).load(set.getPhoto()).into(img);
         TextView setName = findViewById(R.id.set_name);
         setName.setText(set.getName());
-
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        nf.setMaximumFractionDigits(2);
+        DecimalFormat df = (DecimalFormat) nf;
         TextView setPrice = findViewById(R.id.set_price);
-        setPrice.setText("PLN " + set.getTotalPrice());
+        setPrice.setText("PLN " + df.format(set.getTotalPrice()));
         Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
         addAndReturnToBasket.setOnClickListener(v -> {
             for (ProductRecord p : download_products) {
