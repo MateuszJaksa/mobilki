@@ -29,12 +29,30 @@
             android:singleLine="true"
             android:textColor="@color/black_coffee" />
     </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:id="@+id/photo_adding"
+        android:layout_width="match_parent"
+        android:layout_below="@id/input"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/attach_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/fab_margin"
+            android:text="Attach photo"/>
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/fab_margin"
-        android:layout_below="@id/input"
+        android:layout_below="@id/photo_adding"
         android:text="Choose products you want to add to the set:"
         android:textSize="18sp"/>
     <SearchView

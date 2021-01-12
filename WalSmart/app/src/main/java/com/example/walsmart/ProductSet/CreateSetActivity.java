@@ -1,22 +1,32 @@
 package com.example.walsmart.ProductSet;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.ProductSet;
@@ -40,8 +50,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class CreateSetActivity extends AppCompatActivity {
-    Button cancel_btn, create_btn;
+
+    public static final int CAMERA_PERMISSION_CODE = 800;
+    public static final int CAMERA_REQUEST_CODE = 801;
+    Button cancel_btn, create_btn, attach_image;
     EditText set_name;
+    ImageView image;
     private FirebaseAuth firebase_auth;
     public static RecyclerView products;
     private static ArrayList<Product> download_products = new ArrayList<>();
@@ -71,6 +85,12 @@ public class CreateSetActivity extends AppCompatActivity {
         cancel_btn.setOnClickListener(v -> {
             finish();
         });
+        image = findViewById(R.id.photo);
+        attach_image = findViewById(R.id.attach_photo);
+        attach_image.setOnClickListener(v -> {
+            askPermission();
+        });
+
 
         products = findViewById(R.id.my_product_sets);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -95,6 +115,39 @@ public class CreateSetActivity extends AppCompatActivity {
         });
     }
 
+    private void askPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+        } else {
+            launchCamera();
+        }
+    }
+
+    private void launchCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            Bitmap imagebtmp = (Bitmap) data.getExtras().get("data");
+            image.setImageBitmap(imagebtmp);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length < 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchCamera();
+            } else {
+                Toast.makeText(this, "You need to allow for camera usage", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -117,7 +170,7 @@ public class CreateSetActivity extends AppCompatActivity {
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_my_orders) {
+        } else if (id == R.id.action_my_orders) {
             Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }
