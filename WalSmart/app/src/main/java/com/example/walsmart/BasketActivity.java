@@ -20,6 +20,7 @@ import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.Order.OrderActivity;
+import com.example.walsmart.Product.CategoryActivity;
 import com.example.walsmart.Product.ProductActivity;
 import com.example.walsmart.ProductSet.ProductInSetAdapter;
 import com.example.walsmart.ProductSet.ProductSetActivity;
@@ -70,7 +71,7 @@ public class BasketActivity extends AppCompatActivity {
         });
 
         products_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), ProductActivity.class);
+            Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
             startActivity(intent);
         });
     }

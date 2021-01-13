@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/floral_white"
+    tools:context=".Product.ProductActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbar_color" />
+
+    <LinearLayout
+        android:id="@+id/options"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/basket_btn_sets"
+        android:layout_below="@id/toolbar"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/grains_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/grain" />
+
+            <Button
+                android:id="@+id/grains"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#EDD8C8"
+                android:text="GRAINS" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/proteins_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/protein" />
+
+            <Button
+                android:id="@+id/proteins"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#DDDDDD"
+                android:text="Proteins" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dairy_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/dairy" />
+
+            <Button
+                android:id="@+id/dairy"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#BDE0F1"
+                android:text="Dairy" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fruits_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/berry" />
+
+            <Button
+                android:id="@+id/fruits"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#C8AFF3"
+                android:text="Fruits" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vegetables_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/broccoli" />
+
+            <Button
+                android:id="@+id/vegetables"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#C0E397"
+                android:text="vegetables" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/beverages_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/softdrinks" />
+
+            <Button
+                android:id="@+id/beverages"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#ED8989"
+                android:text="Beverages" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sweets_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/candy" />
+
+            <Button
+                android:id="@+id/sweets"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#EFB6C9"
+                android:text="Sweets" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/spices_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/spice" />
+
+            <Button
+                android:id="@+id/spices"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#F3B689"
+                android:text="Spices" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/animal_food_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/pet_bowl" />
+
+            <Button
+                android:id="@+id/animal_food"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:backgroundTint="#F3E785"
+                android:text="Animal food" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/basket_btn_sets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:text="@string/basket"
+        android:textSize="@dimen/btn_text" />
+
+</RelativeLayout>

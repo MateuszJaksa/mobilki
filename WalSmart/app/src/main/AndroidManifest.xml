@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.walsmart">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
-        <activity android:name=".Order.MyOrdersActivity"></activity>
+        <activity android:name=".Product.CategoryActivity"></activity>
+        <activity android:name=".Order.MyOrdersActivity" />
         <activity android:name=".ProductSet.CreateSetActivity" />
         <activity
             android:name=".User.ResetActivity"
@@ -45,8 +46,6 @@
         <activity
             android:name=".ProductSet.EditSet"
             android:label="Edit set" />
-
-
     </application>
 
 </manifest>

@@ -8,16 +8,18 @@ public class Product implements Parcelable {
     private String photo;
     private String size; // np: 6 sztuk / 250 gramow / 2 litry
     private double price;
+    private String category;
 
     public Product() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Product(String name, String photo, String size, double price) {
+    public Product(String name, String photo, String size, double price, String category) {
         this.name = name;
         this.photo = photo;
         this.size = size;
         this.price = price;
+        this.category = category;
     }
 
     protected Product(Parcel in) {
@@ -25,6 +27,7 @@ public class Product implements Parcelable {
         photo = in.readString();
         size = in.readString();
         price = in.readDouble();
+        category = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -71,6 +74,15 @@ public class Product implements Parcelable {
         this.price = price;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -82,5 +94,6 @@ public class Product implements Parcelable {
         dest.writeString(photo);
         dest.writeString(size);
         dest.writeDouble(price);
+        dest.writeString(category);
     }
 }

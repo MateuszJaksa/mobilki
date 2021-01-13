@@ -49,11 +49,19 @@ public class ProductActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);
         });
+        Button categories = findViewById(R.id.categories_btn);
+        categories.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
+            startActivity(intent);
+        });
         products = findViewById(R.id.my_product_sets);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         products.setItemAnimator(new DefaultItemAnimator());
         products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-        getProductsFromDatabase();
+
+        Bundle extras = getIntent().getExtras();
+        String cat = (String) extras.get("category");
+        getProductsFromDatabase(cat);
 
         //search
         SearchView search_engine = findViewById(R.id.search_product_set);
@@ -102,7 +110,7 @@ public class ProductActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getProductsFromDatabase() {
+    private void getProductsFromDatabase(String cat) {
         download_products.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Query query = mDatabase.child("products").orderByKey();
@@ -111,12 +119,8 @@ public class ProductActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 for (DataSnapshot next : snapshotIterator) {
-                    Product p = new Product(
-                            Objects.requireNonNull(next.child("name").getValue()).toString(),
-                            Objects.requireNonNull(next.child("photo").getValue()).toString(),
-                            Objects.requireNonNull(next.child("size").getValue()).toString(),
-                            Double.parseDouble(Objects.requireNonNull(next.child("price").getValue()).toString()));
-                    download_products.add(p);
+                    Product product = next.getValue(Product.class);
+                    if(product.getCategory().equals(cat)) download_products.add(product);
                     products.setAdapter(itemsAdapter);
                 }
             }
