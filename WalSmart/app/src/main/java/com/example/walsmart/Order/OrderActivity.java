@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +20,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.walsmart.BasketActivity;
 import com.example.walsmart.ConfirmationActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Order;
+import com.example.walsmart.PopUpProductAmount;
+import com.example.walsmart.PopUpSlotMachine;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,8 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OrderActivity extends AppCompatActivity implements OnItemSelectedListener {
-    private final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private static final DecimalFormat df2 = new DecimalFormat("#.##");
+     private static final DecimalFormat df2 = new DecimalFormat("#.##");
     Spinner shops, cities;
 
     @SuppressLint("SetTextI18n")
@@ -65,16 +69,15 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
             if (!input.matches("^(\\d{3}[- ]?){2}\\d{3}$")) {
                 Toast.makeText(getApplicationContext(), "That is not a correct phone number", Toast.LENGTH_LONG).show();
             } else {
+
                 Date d = Calendar.getInstance().getTime();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = sdf.format(new Date());
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String id = mDatabase.push().getKey();
                 Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString(), userId);
-                mDatabase.child("orders").child(id).setValue(order);
+                PopUpSlotMachine popUp = new PopUpSlotMachine(order);
+                popUp.showPopupWindow(v);
 
-                Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
-                startActivity(intent);
             }
         });
 

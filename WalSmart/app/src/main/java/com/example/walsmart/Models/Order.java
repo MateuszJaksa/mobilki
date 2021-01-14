@@ -25,6 +25,12 @@ public class Order {
         this.address = address;
         this.userId = userId;
     }
+    public void increasePrice() {
+        this.totalPrice *= 1.02;
+    }
+    public void reducePrice() {
+        totalPrice *= 0.8;
+    }
 
     public List<ProductRecord> getProducts() {
         return products;

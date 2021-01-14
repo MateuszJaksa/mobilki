@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalSmart">
-        <activity android:name=".Product.CategoryActivity"></activity>
+        <activity android:name=".Product.CategoryActivity" />
         <activity android:name=".Order.MyOrdersActivity" />
         <activity android:name=".ProductSet.CreateSetActivity" />
         <activity
