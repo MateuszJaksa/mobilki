@@ -18,7 +18,9 @@ import android.widget.SearchView;
 
 import com.example.walsmart.BasketActivity;
 import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductSet;
+import com.example.walsmart.Models.Stock;
 import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
@@ -113,6 +115,7 @@ public class ProductSetActivity extends AppCompatActivity {
     }
 
     private void getCustomSetsFromDatabase(String set_type) {
+        getStock();
         download_my_sets.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebase_auth = FirebaseAuth.getInstance();
@@ -127,6 +130,27 @@ public class ProductSetActivity extends AppCompatActivity {
                 for (DataSnapshot next : snapshotIterator) {
                     download_my_sets.add(next.getValue(ProductSet.class));
                     sets.setAdapter(customAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(queryValueListener);
+    }
+
+    private void getStock() {
+        Stock.clear();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("products").orderByKey();
+        ValueEventListener queryValueListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                for (DataSnapshot next : snapshotIterator) {
+                    Stock.add(next.getValue(Product.class));
                 }
             }
 

@@ -186,11 +186,6 @@ public class CreateSetActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 for (DataSnapshot next : snapshotIterator) {
-                 /*   Product p = new Product(
-                            Objects.requireNonNull(next.child("name").getValue()).toString(),
-                            Objects.requireNonNull(next.child("photo").getValue()).toString(),
-                            Objects.requireNonNull(next.child("size").getValue()).toString(),
-                            Double.parseDouble(Objects.requireNonNull(next.child("price").getValue()).toString()));*/
                     download_products.add(next.getValue(Product.class));
                     products.setAdapter(itemsAdapter);
                 }

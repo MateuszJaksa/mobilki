@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.Order.OrderActivity;
@@ -26,8 +27,15 @@ import com.example.walsmart.ProductSet.ProductInSetAdapter;
 import com.example.walsmart.ProductSet.ProductSetActivity;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BasketActivity extends AppCompatActivity {
 

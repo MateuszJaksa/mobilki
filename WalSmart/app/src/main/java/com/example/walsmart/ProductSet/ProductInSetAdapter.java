@@ -1,6 +1,8 @@
 package com.example.walsmart.ProductSet;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.walsmart.ConfirmationActivity;
 import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
+import com.example.walsmart.Models.Stock;
 import com.example.walsmart.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -26,6 +37,7 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
 
     private final int layout_id;
     private ArrayList<ProductRecord> items;
+
 
     public ProductInSetAdapter(int layout_id, ArrayList<ProductRecord> items) {
         this.layout_id = layout_id;
@@ -99,9 +111,34 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
         });
         ImageButton cancelBtn = holder.cancelBtn;
         cancelBtn.setOnClickListener(v -> {
-            Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
-            items.remove(index); // popup czy na pewno?
-            notifyDataSetChanged();
+            String category = items.get(index).getProduct().getCategory();
+            String name = items.get(index).getProduct().getName();
+            ProductRecord substitute = new ProductRecord(null, 1);
+            for (Product next : Stock.getProducts()) {
+                if (next.getCategory().equals(category) && !next.getName().equals(name)) {
+                    substitute = new ProductRecord(next, 1);
+                    break;
+                }
+            }
+            ProductRecord finalSubstitute = substitute;
+            new AlertDialog.Builder(holder.itemView.getContext())
+                    .setTitle("Maybe a swap?")
+                    .setMessage("You don't like " + items.get(index).getProduct().getName()
+                            + "? How about swapping it for " + substitute.getProduct().getName()
+                            + "? " + substitute.getProduct().getSize() + " for only PLN "
+                            + substitute.getProduct().getPrice() + "!")
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        items.set(index, finalSubstitute);
+                        Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                        items.remove(index);
+                        Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
+                        notifyDataSetChanged();
+                    })
+                    .setIcon(R.drawable.swap)
+                    .show();
         });
     }
 }
