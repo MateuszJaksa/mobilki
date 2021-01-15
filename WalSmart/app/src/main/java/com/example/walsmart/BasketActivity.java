@@ -41,7 +41,7 @@ public class BasketActivity extends AppCompatActivity {
 
     public static RecyclerView products;
     private static final ArrayList<ProductRecord> basket_products = new ArrayList<>();
-    private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, basket_products);
+    private final ProductInBasketAdapter itemsAdapter = new ProductInBasketAdapter(R.layout.product_set_design);
     private ImageView instruction;
 
     @Override

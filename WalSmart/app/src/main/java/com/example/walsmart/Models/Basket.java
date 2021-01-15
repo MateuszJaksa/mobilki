@@ -1,5 +1,6 @@
 package com.example.walsmart.Models;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class Basket {
     private static final List<ProductRecord> products;
 
     static {
-        products = new LinkedList<>();
+        products = new ArrayList<>();
     }
 
     private Basket() {
