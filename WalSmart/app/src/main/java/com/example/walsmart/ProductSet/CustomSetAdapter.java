@@ -22,13 +22,13 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.ViewHolder> implements Filterable {
+public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.ViewHolder> implements Filterable {
 
     private final int layout_id;
     private ArrayList<ProductSet> items;
     private final ArrayList<ProductSet> all_items;
 
-    public ProductSetAdapter(int layout_id, ArrayList<ProductSet> items) {
+    public CustomSetAdapter(int layout_id, ArrayList<ProductSet> items) {
         this.layout_id = layout_id;
         this.items = items;
         all_items = items;
@@ -49,17 +49,14 @@ public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.Vi
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView productSetName, productSetPrice;
-        public ImageView productSetImage;
+        public TextView productSetName;
         public ProductSet productSet;
 
         public ViewHolder(@NonNull View productSetView) {
             super(productSetView);
             productSetView.setOnClickListener(this);
             productSetName = productSetView.findViewById(R.id.product_name);
-            productSetPrice = productSetView.findViewById(R.id.product_price);
-            productSetImage = productSetView.findViewById(R.id.product_image);
-        }
+            }
 
         @Override
         public void onClick(View v) {
@@ -82,16 +79,8 @@ public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, final int index) {
         TextView productSetName = holder.productSetName;
         productSetName.setText(items.get(index).getName());
-        TextView productSetPrice = holder.productSetPrice;
-        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
-        DecimalFormat df = (DecimalFormat) nf;
-        nf.setMaximumFractionDigits(2);
-        nf.setMinimumFractionDigits(2);
-        productSetPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
-        ImageView productSetImage = holder.productSetImage;
-        holder.productSet = items.get(index);
-        Picasso.with(holder.productSetImage.getContext()).load(items.get(index).getPhoto()).into(productSetImage);
-    }
+          holder.productSet = items.get(index);
+       }
 
     @Override
     public Filter getFilter() {

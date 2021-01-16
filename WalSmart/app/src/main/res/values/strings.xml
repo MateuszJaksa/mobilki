@@ -18,7 +18,7 @@
     <string name="thanks_for_order">Thank you for placing your order!</string>
     <string name="update_via_phone">We will update you on the order status via the given phone numer.</string>
     <string name="finish_shopping">Finish shopping</string>
-    <string name="total_price">Total price to be paid at the shop: </string>
+    <string name="total_price">Total price to be paid at the shop: PLN </string>
     <string name="basket">Back To Basket</string>
     <string name="phone_number">Phone Number</string>
     <string name="choose_city">Choose City</string>
@@ -83,4 +83,15 @@
         <item>ul. Przybyszewskiego 197a</item>
     </string-array>
 
+    <string-array name="categories_array">
+        <item>GRAINS</item>
+        <item>PROTEINS</item>
+        <item>DAIRY</item>
+        <item>FRUITS</item>
+        <item>VEGETABLES</item>
+        <item>BEVERAGES</item>
+        <item>SWEETS</item>
+        <item>SPICES</item>
+        <item>ANIMAL FOOD</item>
+    </string-array>
 </resources>

@@ -2,7 +2,9 @@ package com.example.walsmart.ProductSet;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -121,24 +123,27 @@ public class ProductInSetAdapter extends RecyclerView.Adapter<com.example.walsma
                 }
             }
             ProductRecord finalSubstitute = substitute;
-            new AlertDialog.Builder(holder.itemView.getContext())
+            AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext())
                     .setTitle("Maybe a swap?")
                     .setMessage("You don't like " + items.get(index).getProduct().getName()
                             + "? How about swapping it for " + substitute.getProduct().getName()
                             + "? " + substitute.getProduct().getSize() + " for only PLN "
                             + substitute.getProduct().getPrice() + "!")
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    .setPositiveButton("Ok", (dialog, which) -> {
                         items.set(index, finalSubstitute);
-                        Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
                         notifyDataSetChanged();
                     })
-                    .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                    .setNegativeButton("No, thanks", (dialog, which) -> {
                         items.remove(index);
-                        Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
                         notifyDataSetChanged();
                     })
-                    .setIcon(R.drawable.swap)
-                    .show();
+                    .setIcon(R.drawable.swap);
+            AlertDialog dialog = builder.create();
+            dialog.setOnShowListener(arg0 -> {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+            });
+            dialog.show();
         });
     }
 }

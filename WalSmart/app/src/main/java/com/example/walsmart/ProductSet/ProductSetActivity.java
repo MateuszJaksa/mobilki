@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 
@@ -39,6 +42,7 @@ public class ProductSetActivity extends AppCompatActivity {
     public static RecyclerView sets;
     private static ArrayList<ProductSet> download_my_sets = new ArrayList<>();
     private final ProductSetAdapter customAdapter = new ProductSetAdapter(R.layout.product_design, download_my_sets);
+    private final CustomSetAdapter customAdapter2 = new CustomSetAdapter(R.layout.custom_set_design, download_my_sets);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +59,17 @@ public class ProductSetActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);
         });
+
         Button create_set = findViewById(R.id.create_set);
-        create_set.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
-            intent.putExtra("set_type", set_type);
-            startActivity(intent);
-        });
+        if(set_type.equals("My Sets")) {
+            create_set.setOnClickListener(v -> {
+                Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
+                intent.putExtra("set_type", set_type);
+                startActivity(intent);
+            });
+        } else {
+            create_set.setVisibility(View.GONE);
+        }
 
         sets = findViewById(R.id.my_product_sets);
         sets.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -73,13 +82,21 @@ public class ProductSetActivity extends AppCompatActivity {
         search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                customAdapter.getFilter().filter(query);
+                if(set_type.equals("My Sets")) {
+                    customAdapter2.getFilter().filter(query);
+                } else {
+                    customAdapter.getFilter().filter(query);
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                customAdapter.getFilter().filter(query);
+                if(set_type.equals("My Sets")) {
+                    customAdapter2.getFilter().filter(query);
+                } else {
+                    customAdapter.getFilter().filter(query);
+                }
                 return false;
             }
         });
@@ -129,7 +146,11 @@ public class ProductSetActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 for (DataSnapshot next : snapshotIterator) {
                     download_my_sets.add(next.getValue(ProductSet.class));
-                    sets.setAdapter(customAdapter);
+                    if(set_type.equals("My Sets")) {
+                        sets.setAdapter(customAdapter2);
+                    } else {
+                        sets.setAdapter(customAdapter);
+                    }
                 }
             }
 

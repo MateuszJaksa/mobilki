@@ -35,12 +35,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class OrderActivity extends AppCompatActivity implements OnItemSelectedListener {
-     private static final DecimalFormat df2 = new DecimalFormat("#.##");
     Spinner shops, cities;
 
     @SuppressLint("SetTextI18n")
@@ -50,14 +51,17 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
         setContentView(R.layout.activity_order);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        Button back = (Button) findViewById(R.id.back_btn);
-        Button submit = (Button) findViewById(R.id.submit_btn);
+        Button back = findViewById(R.id.back_btn);
+        Button submit =  findViewById(R.id.submit_btn);
 
-        EditText phoneNumber = (EditText) findViewById(R.id.editTextPhone);
+        EditText phoneNumber =  findViewById(R.id.editTextPhone);
 
-        TextView priceTextView = (TextView) findViewById(R.id.priceTextView);
-
-        priceTextView.setText(getResources().getString(R.string.total_price) + df2.format(Basket.getTotalPrice()) + " PLN");
+        TextView priceTextView =  findViewById(R.id.priceTextView);
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        DecimalFormat df = (DecimalFormat) nf;
+        priceTextView.setText(getResources().getString(R.string.total_price) + df.format(Basket.getTotalPrice()));
 
         back.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);

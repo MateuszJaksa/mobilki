@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
@@ -69,7 +70,7 @@ public class PopUpSlotMachine {
             videoView.start();
             videoView.setOnCompletionListener(mp -> {
                 if (int_random == 0) {
-                    new AlertDialog.Builder(ppView.getContext())
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ppView.getContext())
                             .setTitle("Unlucky")
                             .setMessage("The order price will be increased by 2%. Better luck next time!")
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -79,10 +80,15 @@ public class PopUpSlotMachine {
                                 Intent intent = new Intent(ppView.getContext(), ConfirmationActivity.class);
                                 ppView.getContext().startActivity(intent);
                             })
-                            .setIcon(R.drawable.clover)
-                            .show();
+                            .setIcon(R.drawable.clover);
+                    AlertDialog dialog = builder.create();
+                    dialog.setOnShowListener(arg0 -> {
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+                    });
+                    dialog.show();
                 } else {
-                    new AlertDialog.Builder(ppView.getContext())
+                   AlertDialog.Builder builder = new AlertDialog.Builder(ppView.getContext())
                             .setTitle("Congrats, you won!")
                             .setMessage("The order price will be reduced by 20%.")
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -92,8 +98,13 @@ public class PopUpSlotMachine {
                                 Intent intent = new Intent(ppView.getContext(), ConfirmationActivity.class);
                                 ppView.getContext().startActivity(intent);
                             })
-                            .setIcon(R.drawable.trophy)
-                            .show();
+                            .setIcon(R.drawable.trophy);
+                    AlertDialog dialog = builder.create();
+                    dialog.setOnShowListener(arg0 -> {
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+                    });
+                    dialog.show();
                 }
 
             });

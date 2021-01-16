@@ -22,15 +22,20 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.ProductSet;
 import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.Stock;
 import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.Product.ProductAdapter;
 import com.example.walsmart.R;
@@ -85,11 +90,11 @@ public class CreateSetActivity extends AppCompatActivity {
         cancel_btn.setOnClickListener(v -> {
             finish();
         });
-        image = findViewById(R.id.photo);
+       /* image = findViewById(R.id.photo);
         attach_image = findViewById(R.id.attach_photo);
         attach_image.setOnClickListener(v -> {
             askPermission();
-        });
+        });*/
 
 
         products = findViewById(R.id.my_product_sets);
@@ -99,6 +104,30 @@ public class CreateSetActivity extends AppCompatActivity {
         getProductsFromDatabase();
 
         //search
+        Spinner spinner = findViewById(R.id.product_spinner);
+
+        ArrayAdapter<CharSequence> category_adapter = ArrayAdapter.createFromResource(this,
+                R.array.categories_array, R.layout.my_spinner);
+        category_adapter.setDropDownViewResource(R.layout.my_spinner);
+        spinner.setAdapter(category_adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String item = parentView.getItemAtPosition(position).toString();
+                download_products.clear();
+                for(Product p : Stock.getProducts()) {
+                    if(p.getCategory().equals(item.toLowerCase())) download_products.add(p);
+                }
+                itemsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+
+        });
+
         SearchView search_engine = findViewById(R.id.search_product_set);
         search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

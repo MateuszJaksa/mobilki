@@ -111,8 +111,7 @@ public class ProductInBasketAdapter extends RecyclerView.Adapter<com.example.wal
         });
         ImageButton cancelBtn = holder.cancelBtn;
         cancelBtn.setOnClickListener(v -> {
-           // items.remove(index);
-            Basket.removeProductRecord(items.get(index)); // czy tu na pewno wszystko dziala?
+            Basket.removeProductRecord(items.get(index));
             notifyDataSetChanged();
         });
     }

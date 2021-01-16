@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
@@ -34,8 +35,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BasketActivity extends AppCompatActivity {
 
@@ -54,6 +58,12 @@ public class BasketActivity extends AppCompatActivity {
         Button products_btn = findViewById(R.id.products_btn);
         Button my_sets_btn = findViewById(R.id.my_sets);
         Button checkout_btn = findViewById(R.id.checkout_btn);
+        TextView price = findViewById(R.id.price);
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        DecimalFormat df = (DecimalFormat) nf;
+        price.setText("Total:\nPLN " + df.format(Basket.getTotalPrice()));
         instruction = findViewById(R.id.instruction);
         products = findViewById(R.id.my_basket);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

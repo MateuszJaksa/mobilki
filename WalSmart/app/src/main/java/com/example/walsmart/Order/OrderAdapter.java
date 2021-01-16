@@ -14,7 +14,10 @@ import com.example.walsmart.Models.Order;
 import com.example.walsmart.Models.ProductRecord;
 import com.example.walsmart.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
@@ -84,7 +87,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         TextView OrderDate = holder.OrderDate;
         OrderDate.setText("Date: " + items.get(index).getDate());
         TextView OrderPrice = holder.OrderPrice;
-        OrderPrice.setText("PLN " + items.get(index).getTotalPrice());
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
+        DecimalFormat df = (DecimalFormat) nf;
+        OrderPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
         holder.order = items.get(index);
     }
 }

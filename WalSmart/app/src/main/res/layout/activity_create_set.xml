@@ -24,12 +24,12 @@
             android:id="@+id/set_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Input name of new set here"
+            android:hint="Set name"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/black_coffee" />
     </com.google.android.material.textfield.TextInputLayout>
-    <LinearLayout
+   <!-- <LinearLayout
         android:id="@+id/photo_adding"
         android:layout_width="match_parent"
         android:layout_below="@id/input"
@@ -45,21 +45,30 @@
             android:id="@+id/photo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
     <TextView
         android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/fab_margin"
-        android:layout_below="@id/photo_adding"
-        android:text="Choose products you want to add to the set:"
+        android:layout_below="@id/input"
+        android:textStyle="bold"
+        android:text="Search for products from different categories you want to add:"
         android:textSize="18sp"/>
+    <Spinner
+        android:id="@+id/product_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/fab_margin"
+        android:layout_below="@id/info"
+        android:spinnerMode="dialog"
+        android:layout_marginHorizontal="@dimen/fab_margin"/>
     <SearchView
         android:id="@+id/search_product_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/info"
+        android:layout_below="@id/product_spinner"
         android:background="#25FF6F00"
         android:layout_marginHorizontal="@dimen/fab_margin"
         android:clickable="true"
