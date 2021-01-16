@@ -11,12 +11,13 @@ public class Order {
     private String city;
     private String address;
     private String userId;
+    private String pickupDate;
 
     public Order() {
         // potrzebny do sciagania z bazy
     }
 
-    public Order(List<ProductRecord> products, double totalPrice, String phoneNumber, String date, String city, String address, String userId) {
+    public Order(List<ProductRecord> products, double totalPrice, String phoneNumber, String date, String city, String address, String userId, String pickup_date) {
         this.products = products;
         this.totalPrice = totalPrice;
         this.phoneNumber = phoneNumber;
@@ -24,10 +25,13 @@ public class Order {
         this.city = city;
         this.address = address;
         this.userId = userId;
+        this.pickupDate = pickup_date;
     }
+
     public void increasePrice() {
         this.totalPrice *= 1.02;
     }
+
     public void reducePrice() {
         totalPrice *= 0.8;
     }
@@ -62,5 +66,13 @@ public class Order {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getPickupDate() {
+        return pickupDate;
+    }
+
+    public void setPickupDate(String pickupDate) {
+        this.pickupDate = pickupDate;
     }
 }

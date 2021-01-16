@@ -63,6 +63,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 popup_msg.append(pr.getAmount()).append("x ").append(pr.getProduct().getName()).append("\n");
             }
             popup_msg.append("\nPick up address: ").append(order.getCity()).append(", ").append(order.getAddress());
+            popup_msg.append("\nPick up date: ").append(order.getPickupDate());
             new AlertDialog.Builder(v.getContext())
                     .setTitle("Order details:")
                     .setMessage(popup_msg)

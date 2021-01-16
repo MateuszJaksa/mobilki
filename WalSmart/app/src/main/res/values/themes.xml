@@ -5,8 +5,11 @@
         <item name="colorPrimary">@color/apricot</item>
         <item name="colorPrimaryVariant">@color/apricot</item>
         <item name="colorOnPrimary">@color/black_coffee</item>
+        <item name="colorControlActivated">@color/toolbar_color</item>
+        <item name="android:selectableItemBackgroundBorderless">@color/alice_blue</item>
+        <item name="colorControlHighlight">@color/green</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/floral_white</item>
+        <item name="colorSecondary">#3F51B5</item>
         <item name="colorSecondaryVariant">@color/apricot</item>
         <item name="colorOnSecondary">@color/black_coffee</item>
         <!-- Status bar color. -->
@@ -28,5 +31,9 @@
 
     <style name="Theme.WalSmart.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
+    <style name="datepicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/apricot</item>
+        <item name="colorPrimaryDark">@color/toolbar_color</item>
+        <item name="colorAccent">@color/black_coffee</item>
+    </style>
 </resources>

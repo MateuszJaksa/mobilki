@@ -6,9 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,19 +19,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.example.walsmart.BasketActivity;
-import com.example.walsmart.ConfirmationActivity;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Order;
-import com.example.walsmart.PopUpProductAmount;
 import com.example.walsmart.PopUpSlotMachine;
 import com.example.walsmart.R;
 import com.example.walsmart.User.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -49,6 +43,8 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        Bundle extras = getIntent().getExtras();
+        String pickup_date = (String) extras.get("pickup_date");
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         Button back = findViewById(R.id.back_btn);
@@ -61,10 +57,10 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
         nf.setMaximumFractionDigits(2);
         nf.setMinimumFractionDigits(2);
         DecimalFormat df = (DecimalFormat) nf;
-        priceTextView.setText(getResources().getString(R.string.total_price) + df.format(Basket.getTotalPrice()));
+        priceTextView.setText(getResources().getString(R.string.total_price)+ " " + df.format(Basket.getTotalPrice()));
 
         back.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+            Intent intent = new Intent(getApplicationContext(), OrderDate.class);
             startActivity(intent);
         });
 
@@ -78,13 +74,12 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                 String dateString = sdf.format(new Date());
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString(), userId);
+                Order order = new Order(Basket.getProducts(), Basket.getTotalPrice(), phoneNumber.getText().toString(), dateString, cities.getSelectedItem().toString(), shops.getSelectedItem().toString(), userId, pickup_date);
                 PopUpSlotMachine popUp = new PopUpSlotMachine(order);
                 popUp.showPopupWindow(v);
 
             }
         });
-
 
         shops = (Spinner) findViewById(R.id.shops_spinner);
         cities = (Spinner) findViewById(R.id.cities_spinner);
@@ -94,8 +89,6 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
                 R.array.cities_array, R.layout.my_spinner);
         cities_adapter.setDropDownViewResource(R.layout.my_spinner);
         cities.setAdapter(cities_adapter);
-
-
     }
 
     @Override

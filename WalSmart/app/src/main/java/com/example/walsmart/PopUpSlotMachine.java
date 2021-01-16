@@ -88,7 +88,7 @@ public class PopUpSlotMachine {
                     });
                     dialog.show();
                 } else {
-                   AlertDialog.Builder builder = new AlertDialog.Builder(ppView.getContext())
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ppView.getContext())
                             .setTitle("Congrats, you won!")
                             .setMessage("The order price will be reduced by 20%.")
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> {

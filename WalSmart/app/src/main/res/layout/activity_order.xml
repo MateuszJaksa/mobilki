@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/toolbar_color"></androidx.appcompat.widget.Toolbar>
+        android:background="@color/toolbar_color" />
     <TextView
         android:id="@+id/choose_city"
         android:layout_width="250dp"
@@ -29,7 +29,7 @@
     <Spinner
         android:id="@+id/cities_spinner"
         style="@style/Widget.AppCompat.Spinner.Underlined"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/fab_margin"
         android:layout_below="@id/choose_city"
@@ -51,14 +51,13 @@
     <Spinner
         android:id="@+id/shops_spinner"
         style="@style/Widget.AppCompat.Spinner.Underlined"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/cities_spinner"
-        android:layout_marginBottom="80dp"
-        android:spinnerMode="dialog"
         android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginBottom="80dp"
 
-        />
+        android:spinnerMode="dialog" />
 
     <TextView
         android:layout_marginStart="@dimen/fab_margin"
@@ -74,16 +73,14 @@
     <EditText
         android:layout_marginStart="@dimen/fab_margin"
         android:id="@+id/editTextPhone"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/shops_spinner"
-        android:layout_marginBottom="80dp"
         android:ems="10"
         android:inputType="phone"
         android:textSize="20sp" />
-
-
     <LinearLayout
+        android:id="@+id/price_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/submit_btn"
@@ -130,4 +127,6 @@
         android:textSize="@dimen/btn_text"
 
         />
+
+
 </RelativeLayout>
