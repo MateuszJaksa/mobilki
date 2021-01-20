@@ -90,7 +90,7 @@ public class ProductSetAdapter extends RecyclerView.Adapter<ProductSetAdapter.Vi
         productSetPrice.setText("PLN " + df.format(items.get(index).getTotalPrice()));
         ImageView productSetImage = holder.productSetImage;
         holder.productSet = items.get(index);
-        Picasso.with(holder.productSetImage.getContext()).load(items.get(index).getPhoto()).into(productSetImage);
+        Picasso.get().load(items.get(index).getPhoto()).into(productSetImage);
     }
 
     @Override

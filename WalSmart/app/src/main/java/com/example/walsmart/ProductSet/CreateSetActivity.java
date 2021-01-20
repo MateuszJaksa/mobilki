@@ -56,8 +56,7 @@ import java.util.Objects;
 
 public class CreateSetActivity extends AppCompatActivity {
 
-    public static final int CAMERA_PERMISSION_CODE = 800;
-    public static final int CAMERA_REQUEST_CODE = 801;
+
     Button cancel_btn, create_btn, attach_image;
     EditText set_name;
     ImageView image;
@@ -90,11 +89,7 @@ public class CreateSetActivity extends AppCompatActivity {
         cancel_btn.setOnClickListener(v -> {
             finish();
         });
-       /* image = findViewById(R.id.photo);
-        attach_image = findViewById(R.id.attach_photo);
-        attach_image.setOnClickListener(v -> {
-            askPermission();
-        });*/
+
 
 
         products = findViewById(R.id.my_product_sets);
@@ -144,38 +139,7 @@ public class CreateSetActivity extends AppCompatActivity {
         });
     }
 
-    private void askPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-        } else {
-            launchCamera();
-        }
-    }
 
-    private void launchCamera() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST_CODE) {
-            Bitmap imagebtmp = (Bitmap) data.getExtras().get("data");
-            image.setImageBitmap(imagebtmp);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.length < 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                launchCamera();
-            } else {
-                Toast.makeText(this, "You need to allow for camera usage", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -89,7 +89,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         TextView productPrice = holder.productPrice;
         productPrice.setText("PLN " + items.get(index).getPrice());
         ImageView productImage = holder.productImage;
-        Picasso.with(holder.productImage.getContext()).load(items.get(index).getPhoto()).into(productImage);
+        Picasso.get().load(items.get(index).getPhoto()).into(productImage);
         holder.product = items.get(index);
         holder.myDestination = destination;
     }

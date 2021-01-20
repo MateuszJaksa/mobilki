@@ -55,8 +55,9 @@ public class BasketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_basket);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
-        Button sets_btn = findViewById(R.id.sets_btn);
         Button products_btn = findViewById(R.id.products_btn);
+        Button handwritten_list_btn = findViewById(R.id.handwritten_list);
+        Button sets_btn = findViewById(R.id.sets_btn);
         Button my_sets_btn = findViewById(R.id.my_sets);
         Button checkout_btn = findViewById(R.id.checkout_btn);
         TextView price = findViewById(R.id.price);
@@ -93,6 +94,11 @@ public class BasketActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), CategoryActivity.class);
             startActivity(intent);
         });
+
+        handwritten_list_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), HandwrittenListActivity.class);
+            startActivity(intent);
+        });
     }
 
 
@@ -118,7 +124,7 @@ public class BasketActivity extends AppCompatActivity {
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_my_orders) {
+        } else if (id == R.id.action_my_orders) {
             Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }

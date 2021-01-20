@@ -57,7 +57,7 @@ public class EditSet extends AppCompatActivity {
         convertProductsToProductRecords(products_list);
 
         ImageView img = findViewById(R.id.set_image);
-        Picasso.with(getApplicationContext()).load(set.getPhoto()).into(img);
+        Picasso.get().load(set.getPhoto()).into(img);
         TextView setName = findViewById(R.id.set_name);
         setName.setText(set.getName());
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);

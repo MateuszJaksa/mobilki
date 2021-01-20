@@ -45,6 +45,7 @@
                             Version: 1.4.2</string>
     <string name="my_sets">My sets</string>
     <string name="my_orders">My orders</string>
+    <string name="handwritten_list">Handwritten list</string>
 
     <string-array name="cities_array">
         <item>Warsaw</item>
