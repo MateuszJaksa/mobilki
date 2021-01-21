@@ -90,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/fab_margin"
             android:text="@string/checkout"
+            android:backgroundTint="#C6FD7A15"
             android:textSize="@dimen/btn_text" />
 
         <TextView

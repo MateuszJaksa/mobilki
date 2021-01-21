@@ -58,7 +58,7 @@ public class HandwrittenListActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         videoView = findViewById(R.id.animation);
-        Uri video = Uri.parse("https://firebasestorage.googleapis.com/v0/b/walsmartfb.appspot.com/o/handwritten_list.mp4?alt=media&token=69b2bd1c-4139-42b8-a56f-df632a865adf");
+        Uri video = Uri.parse("https://firebasestorage.googleapis.com/v0/b/walsmartfb.appspot.com/o/handwritten_list.mp4?alt=media&token=749b815c-4908-4ed4-a198-331c4e30bb23");
         videoView.setVideoURI(video);
         videoView.setOnPreparedListener(mp -> {
             mp.setLooping(true);
