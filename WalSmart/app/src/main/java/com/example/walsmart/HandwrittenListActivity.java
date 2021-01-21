@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.walsmart.Models.Basket;
@@ -113,7 +112,7 @@ public class HandwrittenListActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("Debug", "Msg: failure ");
+                Toast.makeText(getApplicationContext(), "Unable to detect text. Try again", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -135,7 +134,6 @@ public class HandwrittenListActivity extends AppCompatActivity {
         for (String n : names) {
             isFound = false;
             for (Product p : Stock.getProducts()) {
-                Log.d("Debug", "Msg: ." + p.getName() + ". = ." + n + ".");
                 if (p.getName().toLowerCase().equals(n.toLowerCase())) {
                     ProductRecord pr = new ProductRecord(p, 1);
                     download_products.add(pr);
