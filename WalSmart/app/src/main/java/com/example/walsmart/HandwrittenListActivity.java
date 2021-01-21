@@ -18,11 +18,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
@@ -37,6 +39,7 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HandwrittenListActivity extends AppCompatActivity {
     public static final int CAMERA_PERMISSION_CODE = 800;
@@ -46,13 +49,21 @@ public class HandwrittenListActivity extends AppCompatActivity {
     public static RecyclerView products;
     private static ArrayList<ProductRecord> download_products = new ArrayList<>();
     private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products);
-
+    private VideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handwritten_list);
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
+        videoView = findViewById(R.id.animation);
+        Uri video = Uri.parse("https://firebasestorage.googleapis.com/v0/b/walsmartfb.appspot.com/o/handwritten_list.mp4?alt=media&token=69b2bd1c-4139-42b8-a56f-df632a865adf");
+        videoView.setVideoURI(video);
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            videoView.start();
+        });
 
         cameraBtn = findViewById(R.id.cameraButton);
         cameraBtn.setOnClickListener(view -> {
@@ -148,7 +159,12 @@ public class HandwrittenListActivity extends AppCompatActivity {
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         products.setItemAnimator(new DefaultItemAnimator());
         products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-        products.setAdapter(itemsAdapter);
+        if (download_products.isEmpty()) {
+            videoView.setAlpha(1.0f);
+        } else {
+            videoView.setAlpha(0.0f);
+            products.setAdapter(itemsAdapter);
+        }
 
         // not found products
         if (!notFoundProducts.toString().isEmpty()) {
@@ -156,10 +172,10 @@ public class HandwrittenListActivity extends AppCompatActivity {
                     .setTitle("Sorry! We couldn't find these products:")
                     .setMessage(notFoundProducts.toString())
                     .setPositiveButton(android.R.string.ok, null)
-                    .setIcon(R.drawable.clover); // change!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    .setIcon(R.drawable.not_found);
             AlertDialog dialog = builder.create();
             dialog.setOnShowListener(arg0 -> {
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#C6FF6F00"));
             });
             dialog.show();
         }
