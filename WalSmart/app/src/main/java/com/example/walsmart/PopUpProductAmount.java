@@ -65,7 +65,16 @@ public class PopUpProductAmount {
             int amount = Integer.parseInt(productAmount.getText().toString());
             if (destination.equals("Basket")) {
                 ProductRecord pr = new ProductRecord(productToAdd, amount);
-                Basket.addProductRecord(pr);
+                boolean isInBasket = false;
+                for (ProductRecord inBasket : Basket.getProducts()) {
+                    if (pr.getProduct().getName().equals(inBasket.getProduct().getName())) {
+                        inBasket.setAmount(inBasket.getAmount() + pr.getAmount());
+                        isInBasket = true;
+                    }
+                }
+                if (!isInBasket) {
+                    Basket.addProductRecord(pr);
+                }
             } else if (destination.equals("Product Set")) {
                 for (int i = 0; i < amount; i++) {
                     staticProductList.add(productToAdd);

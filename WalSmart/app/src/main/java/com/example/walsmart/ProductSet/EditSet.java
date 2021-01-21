@@ -68,7 +68,16 @@ public class EditSet extends AppCompatActivity {
         Button addAndReturnToBasket = findViewById(R.id.add_btn_sets);
         addAndReturnToBasket.setOnClickListener(v -> {
             for (ProductRecord p : download_products) {
-                Basket.addProductRecord(p);
+                boolean isInBasket = false;
+                for (ProductRecord inBasket : Basket.getProducts()) {
+                    if (p.getProduct().getName().equals(inBasket.getProduct().getName())) {
+                        inBasket.setAmount(inBasket.getAmount() + p.getAmount());
+                        isInBasket = true;
+                    }
+                }
+                if (!isInBasket) {
+                    Basket.addProductRecord(p);
+                }
             }
             Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
             startActivity(intent);

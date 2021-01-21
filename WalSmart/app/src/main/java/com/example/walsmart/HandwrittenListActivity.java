@@ -3,22 +3,33 @@ package com.example.walsmart;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.walsmart.Models.Basket;
+import com.example.walsmart.Models.Product;
+import com.example.walsmart.Models.ProductRecord;
+import com.example.walsmart.Models.Stock;
+import com.example.walsmart.ProductSet.ProductInSetAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -26,57 +37,46 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 
+import java.util.ArrayList;
+
 public class HandwrittenListActivity extends AppCompatActivity {
     public static final int CAMERA_PERMISSION_CODE = 800;
     public static final int CAMERA_REQUEST_CODE = 801;
-    ImageView mImageView;
-    Button cameraBtn;
-    Button detectBtn;
-    Bitmap imageBitmap;
-    TextView textView;
+    Button cameraBtn, addBtn;
+    Bitmap handwrittenList;
+    public static RecyclerView products;
+    private static ArrayList<ProductRecord> download_products = new ArrayList<>();
+    private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handwritten_list);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
 
-        mImageView = findViewById(R.id.mImageView);
         cameraBtn = findViewById(R.id.cameraButton);
-        detectBtn = findViewById(R.id.detectButton);
-        textView = findViewById(R.id.textView);
-
         cameraBtn.setOnClickListener(view -> {
-            //openCamera();
             askPermission();
         });
-        detectBtn.setOnClickListener(view -> detectImg());
 
-    }
-
-    private void detectImg() {
-        Log.d("Debug", "Msg: recognized image bitmap " + imageBitmap);
-        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
-        Log.d("Debug", "Msg: recognized image " + image);
-        FirebaseVisionTextRecognizer textRecognizer =
-                FirebaseVision.getInstance().getOnDeviceTextRecognizer();
-        Log.d("Debug", "Msg: recognized textRecognizer " + textRecognizer);
-        textRecognizer.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-            @Override
-            public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                //processTxt(firebaseVisionText);
-                Log.d("Debug", "Msg: recognized vision text " + firebaseVisionText);
-                Log.d("Debug", "Msg: recognized text " + firebaseVisionText.getText());
-                textView.setText(firebaseVisionText.getText());
+        addBtn = findViewById(R.id.add_btn);
+        addBtn.setOnClickListener(view -> {
+            for (ProductRecord p : download_products) {
+                boolean isInBasket = false;
+                for (ProductRecord inBasket : Basket.getProducts()) {
+                    if (p.getProduct().getName().equals(inBasket.getProduct().getName())) {
+                        inBasket.setAmount(inBasket.getAmount() + p.getAmount());
+                        isInBasket = true;
+                    }
+                }
+                if (!isInBasket) {
+                    Basket.addProductRecord(p);
+                }
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("Debug", "Msg: failure ");
-
-            }
+            Intent intent = new Intent(getApplicationContext(), BasketActivity.class);
+            startActivity(intent);
         });
-
-
     }
 
     private void askPermission() {
@@ -96,8 +96,74 @@ public class HandwrittenListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
-            imageBitmap = (Bitmap) data.getExtras().get("data");
-            mImageView.setImageBitmap(imageBitmap);
+            handwrittenList = (Bitmap) data.getExtras().get("data");
+            detectImg();
+        }
+    }
+
+    private void detectImg() {
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(handwrittenList);
+        FirebaseVisionTextRecognizer textRecognizer =
+                FirebaseVision.getInstance().getOnDeviceTextRecognizer();
+        textRecognizer.processImage(image).addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+            @Override
+            public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                processText(firebaseVisionText);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Debug", "Msg: failure ");
+            }
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void processText(FirebaseVisionText firebaseVisionText) {
+        // names of products from the picture
+        ArrayList<String> names = new ArrayList<>();
+        for (FirebaseVisionText.TextBlock tb : firebaseVisionText.getTextBlocks()) {
+            tb.getText();
+            for (FirebaseVisionText.Line l : tb.getLines()) {
+                names.add(l.getText());
+            }
+        }
+        // find those products in Stock
+        download_products.clear();
+        StringBuilder notFoundProducts = new StringBuilder();
+        boolean isFound;
+        for (String n : names) {
+            isFound = false;
+            for (Product p : Stock.getProducts()) {
+                Log.d("Debug", "Msg: ." + p.getName() + ". = ." + n + ".");
+                if (p.getName().toLowerCase().equals(n.toLowerCase())) {
+                    ProductRecord pr = new ProductRecord(p, 1);
+                    download_products.add(pr);
+                    isFound = true;
+                }
+            }
+            if (!isFound) {
+                notFoundProducts.append(n).append('\n');
+            }
+        }
+        products = findViewById(R.id.set_products);
+        products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        products.setItemAnimator(new DefaultItemAnimator());
+        products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
+        products.setAdapter(itemsAdapter);
+
+        // not found products
+        if (!notFoundProducts.toString().isEmpty()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setTitle("Sorry! We couldn't find these products:")
+                    .setMessage(notFoundProducts.toString())
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setIcon(R.drawable.clover); // change!!!!!!!!!!!!!!!!!!!!!!!!!!
+            AlertDialog dialog = builder.create();
+            dialog.setOnShowListener(arg0 -> {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#C6FF6F00"));
+            });
+            dialog.show();
         }
     }
 

@@ -132,7 +132,6 @@ public class ProductSetActivity extends AppCompatActivity {
     }
 
     private void getCustomSetsFromDatabase(String set_type) {
-        getStock();
         download_my_sets.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebase_auth = FirebaseAuth.getInstance();
@@ -162,24 +161,5 @@ public class ProductSetActivity extends AppCompatActivity {
         query.addListenerForSingleValueEvent(queryValueListener);
     }
 
-    private void getStock() {
-        Stock.clear();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query query = mDatabase.child("products").orderByKey();
-        ValueEventListener queryValueListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
-                for (DataSnapshot next : snapshotIterator) {
-                    Stock.add(next.getValue(Product.class));
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        query.addListenerForSingleValueEvent(queryValueListener);
-    }
 }

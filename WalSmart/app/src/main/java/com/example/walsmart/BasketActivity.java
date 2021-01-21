@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.walsmart.Models.Basket;
 import com.example.walsmart.Models.Product;
 import com.example.walsmart.Models.ProductRecord;
+import com.example.walsmart.Models.Stock;
 import com.example.walsmart.Order.MyOrdersActivity;
 import com.example.walsmart.Order.OrderActivity;
 import com.example.walsmart.Order.OrderDate;
@@ -72,7 +73,7 @@ public class BasketActivity extends AppCompatActivity {
         products.setItemAnimator(new DefaultItemAnimator());
         products.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         loadBasket();
-
+        getStock();
         checkout_btn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), OrderDate.class);
             startActivity(intent);
@@ -141,5 +142,25 @@ public class BasketActivity extends AppCompatActivity {
             instruction.setAlpha(0.0f);
             products.setAdapter(itemsAdapter);
         }
+    }
+    private void getStock() {
+        Stock.clear();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("products").orderByKey();
+        ValueEventListener queryValueListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                for (DataSnapshot next : snapshotIterator) {
+                    Stock.add(next.getValue(Product.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        query.addListenerForSingleValueEvent(queryValueListener);
     }
 }

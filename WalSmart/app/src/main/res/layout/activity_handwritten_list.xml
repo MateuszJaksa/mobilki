@@ -11,47 +11,53 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbar_color" />
+    <TextView
+        android:id="@+id/instruction"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_below="@+id/toolbar"
+        android:text="In a rush? Just snap a quick photo of your list and we will take care of the rest :)"
+        android:textSize="24sp"/>
     <Button
         android:id="@+id/cameraButton"
-        android:layout_width="108dp"
-        android:layout_height="72dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="44dp"
-        android:text="Camera"
-        android:layout_marginTop="8dp"
-        />
-
-    <Button
-        android:id="@+id/detectButton"
-        android:layout_width="108dp"
-        android:layout_below="@+id/cameraButton"
-        android:layout_height="72dp"
-        android:layout_marginBottom="41dp"
-        android:layout_marginEnd="44dp"
-        android:text="Detect text"
-        android:layout_marginTop="8dp"
-        />
-
-    <ImageView
-        android:id="@+id/mImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_below="@+id/detectButton"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="fitXY"
-        />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_below="@+id/mImageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="text to be recognized"
-        android:layout_marginTop="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_below="@+id/instruction"
+        android:text="Take a photo"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/set_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_to_basket"
+        android:layout_below="@+id/cameraButton"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin" />
+
+    <LinearLayout
+        android:id="@+id/add_to_basket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginVertical="@dimen/fab_margin"
+            android:src="@drawable/basket" />
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:text="@string/add_to_basket"
+            android:textSize="@dimen/btn_text" />
+    </LinearLayout>
 </RelativeLayout>
