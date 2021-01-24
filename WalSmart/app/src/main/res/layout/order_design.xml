@@ -3,25 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/floral_white"
-    android:padding="@dimen/fab_margin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/fab_margin">
 
     <TextView
         android:id="@+id/order_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="#FB6231"
         android:text="Order number"
-        />
+        android:textColor="#FB6231"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/order_date"
         android:layout_width="wrap_content"
-        android:textSize="20sp"
         android:layout_height="wrap_content"
-        android:text="Order date" />
+        android:text="Order date"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/order_price"

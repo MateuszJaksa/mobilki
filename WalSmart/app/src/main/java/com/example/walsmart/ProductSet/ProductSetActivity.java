@@ -61,7 +61,7 @@ public class ProductSetActivity extends AppCompatActivity {
         });
 
         Button create_set = findViewById(R.id.create_set);
-        if(set_type.equals("My Sets")) {
+        if (set_type.equals("My Sets")) {
             create_set.setOnClickListener(v -> {
                 Intent intent = new Intent(getApplicationContext(), CreateSetActivity.class);
                 intent.putExtra("set_type", set_type);
@@ -82,7 +82,7 @@ public class ProductSetActivity extends AppCompatActivity {
         search_engine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(set_type.equals("My Sets")) {
+                if (set_type.equals("My Sets")) {
                     customAdapter2.getFilter().filter(query);
                 } else {
                     customAdapter.getFilter().filter(query);
@@ -92,7 +92,7 @@ public class ProductSetActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String query) {
-                if(set_type.equals("My Sets")) {
+                if (set_type.equals("My Sets")) {
                     customAdapter2.getFilter().filter(query);
                 } else {
                     customAdapter.getFilter().filter(query);
@@ -124,7 +124,7 @@ public class ProductSetActivity extends AppCompatActivity {
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_my_orders) {
+        } else if (id == R.id.action_my_orders) {
             Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }
@@ -145,7 +145,7 @@ public class ProductSetActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 for (DataSnapshot next : snapshotIterator) {
                     download_my_sets.add(next.getValue(ProductSet.class));
-                    if(set_type.equals("My Sets")) {
+                    if (set_type.equals("My Sets")) {
                         sets.setAdapter(customAdapter2);
                     } else {
                         sets.setAdapter(customAdapter);

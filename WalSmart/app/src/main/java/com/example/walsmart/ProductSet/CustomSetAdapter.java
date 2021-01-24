@@ -56,7 +56,7 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
             super(productSetView);
             productSetView.setOnClickListener(this);
             productSetName = productSetView.findViewById(R.id.product_name);
-            }
+        }
 
         @Override
         public void onClick(View v) {
@@ -79,8 +79,8 @@ public class CustomSetAdapter extends RecyclerView.Adapter<CustomSetAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, final int index) {
         TextView productSetName = holder.productSetName;
         productSetName.setText(items.get(index).getName());
-          holder.productSet = items.get(index);
-       }
+        holder.productSet = items.get(index);
+    }
 
     @Override
     public Filter getFilter() {

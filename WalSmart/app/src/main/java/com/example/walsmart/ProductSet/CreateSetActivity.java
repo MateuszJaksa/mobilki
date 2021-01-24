@@ -57,9 +57,8 @@ import java.util.Objects;
 public class CreateSetActivity extends AppCompatActivity {
 
 
-    Button cancel_btn, create_btn, attach_image;
+    Button cancel_btn, create_btn;
     EditText set_name;
-    ImageView image;
     private FirebaseAuth firebase_auth;
     public static RecyclerView products;
     private static ArrayList<Product> download_products = new ArrayList<>();
@@ -91,7 +90,6 @@ public class CreateSetActivity extends AppCompatActivity {
         });
 
 
-
         products = findViewById(R.id.my_product_sets);
         products.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         products.setItemAnimator(new DefaultItemAnimator());
@@ -110,8 +108,8 @@ public class CreateSetActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String item = parentView.getItemAtPosition(position).toString();
                 download_products.clear();
-                for(Product p : Stock.getProducts()) {
-                    if(p.getCategory().equals(item.toLowerCase())) download_products.add(p);
+                for (Product p : Stock.getProducts()) {
+                    if (p.getCategory().equals(item.toLowerCase())) download_products.add(p);
                 }
                 itemsAdapter.notifyDataSetChanged();
             }
@@ -138,7 +136,6 @@ public class CreateSetActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     @Override

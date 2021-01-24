@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/floral_white"
     tools:context=".ConfirmationActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbar_color" >
-    </androidx.appcompat.widget.Toolbar>
+        android:background="@color/toolbar_color"/>
+
     <TextView
         android:id="@+id/thanks_for_order"
-        android:layout_below="@id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:layout_marginHorizontal="@dimen/fab_margin"
         android:layout_marginTop="@dimen/fab_margin"
         android:text="@string/thanks_for_order"

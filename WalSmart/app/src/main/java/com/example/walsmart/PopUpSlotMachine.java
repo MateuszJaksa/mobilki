@@ -54,11 +54,14 @@ public class PopUpSlotMachine {
         VideoView videoView;
         videoView = ppView.findViewById(R.id.animation);
         Uri video;
-        int int_random = new Random().nextInt(2); // change according to wanted probability
-        if (int_random == 0)
+        int int_random = new Random().nextInt(10); // change according to wanted probability
+        if (int_random == 0) {
+            // lost 0
             video = Uri.parse("https://firebasestorage.googleapis.com/v0/b/walsmartfb.appspot.com/o/slot_machine.mp4?alt=media&token=0dba2bc3-fb6c-4b9b-9f35-417b0501fea0");
-        else
+        } else {
+            // win 1 - 9
             video = Uri.parse("https://firebasestorage.googleapis.com/v0/b/walsmartfb.appspot.com/o/slot_machine_won.mp4?alt=media&token=c7327b62-f3df-4b62-87a0-acbd63b129d0");
+        }
         videoView.setVideoURI(video);
         videoView.setOnPreparedListener(mp -> {
             videoView.start();

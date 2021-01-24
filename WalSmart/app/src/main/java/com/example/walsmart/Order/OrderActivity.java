@@ -48,16 +48,16 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
         Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         Button back = findViewById(R.id.back_btn);
-        Button submit =  findViewById(R.id.submit_btn);
+        Button submit = findViewById(R.id.submit_btn);
 
-        EditText phoneNumber =  findViewById(R.id.editTextPhone);
+        EditText phoneNumber = findViewById(R.id.editTextPhone);
 
-        TextView priceTextView =  findViewById(R.id.priceTextView);
+        TextView priceTextView = findViewById(R.id.priceTextView);
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
         nf.setMaximumFractionDigits(2);
         nf.setMinimumFractionDigits(2);
         DecimalFormat df = (DecimalFormat) nf;
-        priceTextView.setText(getResources().getString(R.string.total_price)+ " " + df.format(Basket.getTotalPrice()));
+        priceTextView.setText(getResources().getString(R.string.total_price) + " " + df.format(Basket.getTotalPrice()));
 
         back.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), OrderDate.class);
@@ -139,7 +139,7 @@ public class OrderActivity extends AppCompatActivity implements OnItemSelectedLi
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_my_orders) {
+        } else if (id == R.id.action_my_orders) {
             Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }

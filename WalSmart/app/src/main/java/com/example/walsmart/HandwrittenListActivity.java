@@ -50,6 +50,7 @@ public class HandwrittenListActivity extends AppCompatActivity {
     private static ArrayList<ProductRecord> download_products = new ArrayList<>();
     private final ProductInSetAdapter itemsAdapter = new ProductInSetAdapter(R.layout.product_set_design, download_products);
     private VideoView videoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

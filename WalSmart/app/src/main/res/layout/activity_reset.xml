@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/floral_white"
-    android:padding="25dp"
     android:gravity="center"
     android:orientation="vertical"
+    android:padding="25dp"
     tools:context=".User.SignUpActivity">
 
     <ImageView
@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="10dp"
         android:gravity="center"
+        android:padding="10dp"
         android:text="@string/password_recovery_hint"
         android:textColor="@color/black_coffee"
         android:textSize="20sp" />

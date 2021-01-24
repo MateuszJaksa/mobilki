@@ -2,23 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/floral_white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/floral_white"
     tools:context=".Product.ProductActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/toolbar_color" >
-    </androidx.appcompat.widget.Toolbar>
+        android:background="@color/toolbar_color"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/toolbar"
         android:id="@+id/my_orders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/back_btn"
+        android:layout_below="@+id/toolbar"
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin" />
 
@@ -26,9 +26,9 @@
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_alignParentBottom="true"
         android:text="@string/back"
         android:textSize="@dimen/btn_text" />
 

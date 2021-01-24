@@ -17,9 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private  EditText email;
-    private  EditText password;
-    private  FirebaseAuth firebase_auth;
+    private EditText email;
+    private EditText password;
+    private FirebaseAuth firebase_auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

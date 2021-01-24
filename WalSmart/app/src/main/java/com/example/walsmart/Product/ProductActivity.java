@@ -103,7 +103,7 @@ public class ProductActivity extends AppCompatActivity {
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_my_orders) {
+        } else if (id == R.id.action_my_orders) {
             Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }
@@ -120,7 +120,7 @@ public class ProductActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 for (DataSnapshot next : snapshotIterator) {
                     Product product = next.getValue(Product.class);
-                    if(product.getCategory().equals(cat)) download_products.add(product);
+                    if (product.getCategory().equals(cat)) download_products.add(product);
                     products.setAdapter(itemsAdapter);
                 }
             }

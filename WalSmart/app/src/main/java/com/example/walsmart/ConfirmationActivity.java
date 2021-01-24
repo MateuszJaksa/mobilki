@@ -56,7 +56,7 @@ public class ConfirmationActivity extends AppCompatActivity {
             Basket.clear();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);
-        } else if(id == R.id.action_my_orders) {
+        } else if (id == R.id.action_my_orders) {
             Intent intent = new Intent(getApplicationContext(), MyOrdersActivity.class);
             startActivity(intent);
         }

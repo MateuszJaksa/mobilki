@@ -14,6 +14,7 @@ public class Stock {
 
     private Stock() {
     }
+
     public static List<Product> getProducts() {
         return products;
     }
@@ -21,6 +22,7 @@ public class Stock {
     public static void clear() {
         products.clear();
     }
+
     public static void add(Product p) {
         products.add(p);
     }

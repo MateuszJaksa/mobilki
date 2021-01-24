@@ -143,6 +143,7 @@ public class BasketActivity extends AppCompatActivity {
             products.setAdapter(itemsAdapter);
         }
     }
+
     private void getStock() {
         Stock.clear();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
