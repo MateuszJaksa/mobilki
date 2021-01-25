@@ -24,8 +24,9 @@
             android:id="@+id/set_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2B2B2B"
+            android:background="#25FF6F00"
             android:hint="Set name"
+            android:textColorHint="@color/black_coffee"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/black_coffee" />
